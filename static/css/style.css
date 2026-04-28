@@ -2,6 +2,15 @@
     background-color: black;
 } */
 
+
+
+.jcc {
+ display: flex;
+ justify-content: center;
+}
+
+
+
 h1 {
     color: white;
     font-size: 22px;
@@ -131,6 +140,47 @@ padding-right: 3px;
 }
 
 
+/* Modal */
+
+
+/* .modal {
+    background-color: black;
+    
+
+}
+
+
+/* #Register {
+  background-color: rgb(255, 255, 255);
+  background-image: radial-gradient(circle at 50% 50%, black 10px, white 1px);
+  background-size: 20px 20px;
+
+} */
+ 
+
+.dropdown-menu {
+ padding-top: 0px;
+ padding-bottom: 0px;
+}
+
+.dropdown-menu form {
+ padding-top: 0px;
+ background: black;
+ color: #ffffff;
+ padding-bottom: 5px;
+}
+
+.btn-primary {
+ background-color: white;
+ color: black;
+ font-weight: 700;
+ font-size: 18px;
+}
+
+
+
+ 
+/* box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); */
 
 /* Media Query
 
