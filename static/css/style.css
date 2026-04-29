@@ -157,6 +157,13 @@ padding-right: 3px;
 
 } */
  
+.blk-background {
+  background-color: black;
+}
+.blk-background a {
+  color: white!important;
+  text-decoration: underline!important;
+}
 
 .dropdown-menu {
  padding-top: 0px;

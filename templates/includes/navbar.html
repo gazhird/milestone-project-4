@@ -28,55 +28,55 @@
                 </form>
                 </li>  -->
 
-                <li class="nav-item mt-1 ms-sm-auto">
-                <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-label="Register">Register</button>
-                    <ul class="dropdown-menu">
-                        <li>   
-                            <div class="row jcc">
-                                <form method="post" action="">
-                                    <div class="col-12 mt-3 jcc">
-                                    <label for="first_name"></label>
-                                    <input type="text" name="first_name" placeholder="First Name">
-                                    </div>
-
-                                    <div class="col-12 mt-2 jcc">
-                                    <label for="last_name"></label>
-                                    <input type="text" name="last_name" placeholder="Last Name">
-                                    </div>
-
-                                    <div class="col-12 mt-2 jcc">
-                                    <label for="username"></label>
-                                    <input type="text" name="username" placeholder="Username">
-                                    </div>
-
-                                    <div class="col-12 mt-2 jcc">
-                                    <label for="password1"></label>
-                                    <input type="password" name="password1" placeholder="Password">
-                                    </div>
-
-                                    <div class="col-12 mt-2 jcc">
-                                    <label for="password2" ></label>
-                                    <input type="password" name="password2" placeholder="Confirm Password">
-                                    </div>
-
-                                    <div class="col-12 mt-3">
-                                    <label for="submit" ></label>
-                                    <button type="submit" class="btn btn-primary"  aria-label="submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                </li>
-
 
                 <!-- Log in -->
-                <li class="nav-item mt-1">
+                <li class="nav-item mt-1 ms-sm-auto">
                 <div class="dropdown">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-label="Log in">Log In</button>
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-label="Log in">Log In</button>
                     <ul class="dropdown-menu">
+
+                        <li class="blk-background pt-3" >
+                            <a data-bs-toggle="collapse" data-bs-target="#create">Create an account</a>
+
+                            <div id="create" class="collapse">
+                                <div class="row jcc">
+                                    <form method="post" action="">
+                                        <div class="col-12 mt-3 jcc">
+                                        <label for="first_name"></label>
+                                        <input type="text" name="first_name" placeholder="First Name">
+                                        </div>
+
+                                        <div class="col-12 mt-2 jcc">
+                                        <label for="last_name"></label>
+                                        <input type="text" name="last_name" placeholder="Last Name">
+                                        </div>
+
+                                        <div class="col-12 mt-2 jcc">
+                                        <label for="username"></label>
+                                        <input type="text" name="username" placeholder="Username">
+                                        </div>
+
+                                        <div class="col-12 mt-2 jcc">
+                                        <label for="password1"></label>
+                                        <input type="password" name="password1" placeholder="Password">
+                                        </div>
+
+                                        <div class="col-12 mt-2 jcc">
+                                        <label for="password2" ></label>
+                                        <input type="password" name="password2" placeholder="Confirm Password">
+                                        </div>
+
+                                        <div class="col-12 mt-3">
+                                        <label for="submit" ></label>
+                                        <button type="submit" class="btn btn-primary"  aria-label="submit">Register</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </li>
+
+
                         <li>
                             <div class="row jcc">
                                 <form method="post" action="">
