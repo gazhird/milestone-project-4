@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                <a class="link" href=""><i class="fa-solid fa-house mr-1"></i>Link</a>
+                <a class="link" href="{% url 'home' %}"><i class="fa-solid fa-house mr-1"></i>Home</a>
                 </li>
                 
                 <li class="nav-item">
@@ -18,18 +18,19 @@
                 
                 <!-- right side -->
                 
-                <!-- <li class="nav-item ms-sm-auto"> 
-                <p class="username"><i class="fa-solid fa-user mr-1"></i>username</p>
+                {% if user.is_authenticated %}
+                <li class="nav-item ms-sm-auto"> 
+                <p class="username"><i class="fa-solid fa-user mr-1"></i>{{ user.username }}</p>
                 </li> 
                 <li class="nav-item mt-1" >
-                <form action="" method="post" class="logout-form">
-                
+                <form action="{% url 'accounts:logout' %}" method="post" class="logout-form">
+                {% csrf_token %}
                 <button type="submit" class="btn btn-primary"  aria-label="Log out">Logout</button>
                 </form>
-                </li>  -->
+                </li> 
+                {% else %}
 
-
-                <!-- Log in -->
+                <!-- Log in Section-->
                 <li class="nav-item mt-1 ms-sm-auto">
                 <div class="dropdown">
                     <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-label="Log in">Log In</button>
@@ -37,10 +38,11 @@
 
                         <li class="blk-background pt-3" >
                             <a data-bs-toggle="collapse" data-bs-target="#create">Create an account</a>
-
+                            <!-- Register form -->
                             <div id="create" class="collapse">
                                 <div class="row jcc">
-                                    <form method="post" action="">
+                                    <form method="post" action="{% url 'accounts:register' %}">
+                                        {% csrf_token %}
                                         <div class="col-12 mt-3 jcc">
                                         <label for="first_name"></label>
                                         <input type="text" name="first_name" placeholder="First Name">
@@ -75,9 +77,11 @@
                             </div>
                         </li>
 
+                        <!-- Login form -->
                         <li>
                             <div class="row jcc">
-                                <form method="post" action="">
+                                <form method="post" action="{% url 'accounts:login' %}">
+                                    {% csrf_token %}
                                     <div class="col-12 mt-3 jcc">
                                         <label for="username" ></label>
                                         <input type="text" name="username" placeholder="Username">
@@ -96,6 +100,7 @@
                     </ul>
                 </div>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
