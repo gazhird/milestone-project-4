@@ -169,6 +169,18 @@ padding-right: 3px;
 }
 
 
+/* notifications */
+.notifications-section {
+  background-color: aqua;
+}
+
+/* clock */
+.clock-section {
+  background-color: yellow;
+}
+
+
+
 
 /* Media Query
 
