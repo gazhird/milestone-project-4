@@ -193,6 +193,14 @@ padding-right: 3px;
 }
 
 
+
+.blue {
+  background-color: blue;
+  padding: 10px;
+  height: 70px;
+}
+
+
 /* Media Query
 
 
