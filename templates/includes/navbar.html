@@ -14,7 +14,7 @@
                 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                <a class="link" href=""><i class="fa-solid fa-upload mr-1"></i>Upload</a>
+                <a class="link" href="{% url 'listings:upload' %}"><i class="fa-solid fa-upload mr-1"></i>Upload</a>
                 </li>
 
                 <li class="nav-item">
