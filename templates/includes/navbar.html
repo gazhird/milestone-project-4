@@ -12,9 +12,16 @@
                 <a class="link" href="{% url 'home' %}"><i class="fa-solid fa-house mr-1"></i>Home</a>
                 </li>
                 
+                {% if user.is_authenticated %}
                 <li class="nav-item">
-                <a class="link" href=""><i class="fa-solid fa-upload mr-1"></i>Link</a>
+                <a class="link" href=""><i class="fa-solid fa-upload mr-1"></i>Upload</a>
                 </li>
+
+                <li class="nav-item">
+                <a class="link" href=""><i class="fa-solid fa-envelope mr-1"></i>Notifications</a>
+                </li>
+
+                {% endif %}
                 
                 <!-- right side -->
                 
