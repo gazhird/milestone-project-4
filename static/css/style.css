@@ -176,10 +176,21 @@ padding-right: 3px;
 
 /* clock */
 .clock-section {
-  background-color: yellow;
+  background-color: black;
+  color: white;
+  font-weight: 700;
 }
 
 
+/* home display */
+
+.home-display {
+  margin-top: 20px;
+  background-color: black;
+  height: 270px;
+  color: white;
+  font-weight: 700;
+}
 
 
 /* Media Query

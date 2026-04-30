@@ -27,21 +27,58 @@
         {% include 'includes/navbar.html' %}
 
 
-        
+        <div class="container home-display pt-4">
+            <div class="row">
+                <div class="col-12">
+                  <select id="select-category" class="form-select" >
+                    <option value="vehicle" >Vehicles</option>
+                    <option value="household" >Household</option>
+                    <option value="electrical" >Electrical</option>
+                    <option value="garden" >Garden</option>
+                    <option value="clothing" >Clothing</option>
+                  </select>
+                </div> 
+            </div>
+            <div class="row">
+              <div id="vehicle" class="category-display">showing vehicle</div>
+              <div id="household" class="category-display">showing household</div>
+              <div id="electrical" class="category-display">showing electrical</div>
+              <div id="garden" class="category-display">showing garden</div>
+              <div id="clothing" class="category-display">showing clothing</div>
+            </div>
+        </div> 
+
+        <script>
+
+          function showCategory() {
+            // Hide all
+            document.querySelectorAll('.category-display').forEach(function(box) {
+            box.style.display = 'none';
+            });
+
+            // Show selected
+            const selectedValue = document.getElementById('select-category').value;
+            document.getElementById(selectedValue).style.display = 'block';
+            }
+
+            // Show first on page load
+            showCategory();
+
+            // change when different category selected
+            document.getElementById('select-category').addEventListener('change', showCategory);
+        </script>
 
 
 
 
-
-
-        <div class="container">
+        <!-- <div class="container">
             <div class="row">
                 <div class="col-6"></div>
                 <div class="col-6">
                     <h1><i class="fas fa-frog me-2"></i>test...</h1>
                 </div>
             </div>
-        </div>
+        </div> -->
 
     
     </main>
