@@ -19,16 +19,128 @@
     <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
-
-        <section id="upload-section" class="mt-4">
-
+    <section id="upload-section" >
+        <div class="container-fluid pt-4">
             <h1>upload section....</h1> 
-            <form method="post" action="{% url 'listings:upload' %}">
-            
-            {% csrf_token %}
-            </form>
+            <form method="post" action="{% url 'listings:upload' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                
 
-        </section>
+                <label for="make" >Make</label>
+                <br>
+                <input id="make" type="text" name="make" required>
+                
+                <br>
+                <label for="model" >Model</label>
+                <br>
+                <input id="model" type="text" name="model" required>
+                
+                <br>
+                <label for="year" >Manufactured Year</label>
+                <br>
+                <input id="year" type="number" name="year" required>
+                
+                <br>
+                <label for="registration" >Vehicle Registration</label>
+                <br>
+                <input id="registration" type="text" name="registration" required>
+                
+                <br>
+                <label for="mileage" >Mileage</label>
+                <br>
+                <input id="mileage" type="number" name="mileage" required>
+                
+                <br>
+                <label for="fuel" ></label>
+                <br>
+                <select name="fuel" id="fuel" required>
+                    <option value="">Select Fuel Type</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric</option>
+                    <option value="hybrid">Hybrid</option>
+                </select>
+                
+                <br>
+                <label for="transmission" ></label>
+                <br>
+                <select name="transmission" id="transmission" required>
+                    <option value="">Select Transmission</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatic">Automatic</option>
+                </select>
+                
+                <br>
+                <label for="condition" ></label>
+                <br>
+                <select name="condition" id="condition" required>
+                    <option value="">Select Condition</option>
+                    <option value="excellent">Excellent</option>
+                    <option value="good">Good</option>
+                    <option value="average">Average</option>
+                    <option value="nonrunner">Non Runner</option>
+                </select>
+                <br>
+                <br>
+                <label for="colour" >Colour</label>
+                <br>
+                <input id="colour" type="text" name="colour" required>
+                
+                <br>
+                <label for="doors">Number of Doors</label>
+                <br>
+                <input id="doors" type="number" name="doors" required>
+                
+                <br>
+                <label for="description" >Description</label>
+                <br>
+                <textarea id="description" name="description" required></textarea>
+                <br>
+                <label for="Auction_Buynow" ></label>
+                <br>
+                <select name="condition" id="Auction_Buynow" required>
+                    <option value="">Select Option</option>
+                    <option value="auction">Auction</option>
+                    <option value="buynow">Buy Now</option>
+                </select>
+                <br>
+                <br>
+                <label for="start_price" >Start Price</label>
+                <br>
+                <input id="start_price" type="number" name="starting_price" step="0.01" required>
+                <br>
+                <label for="end-time" >End Time</label>
+                <br>
+                <input id="end-time" type="datetime-local" name="ends_at" required>
+                <br>
+                <br>
+
+
+
+                <label for="image1" >Required Image</label>
+                <br>
+                <input id="image1" type="file" name="image1" accept="image/*" required>
+                <br>
+                <label for="image2" >Optional Image</label>
+                <br>
+                <input id="image2" type="file" name="image2" accept="image/*">
+                <br>
+                <label for="image3" >Optional Image</label>
+                <br>
+                <input id="image3" type="file" name="image3" accept="image/*">
+                <br>
+                <label for="image4" >Optional Image</label>
+                <br>
+                <input id="image4" type="file" name="image4" accept="image/*">
+                <br>
+                <br>
+                <button type="submit">List Vehicle</button>
+
+             </form>
+        </div> 
+    </section>
+
+
     
 
     </main>

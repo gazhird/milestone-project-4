@@ -193,19 +193,18 @@ padding-right: 3px;
 }
 
 
-
-.blue {
-  background-color: blue;
-  padding: 10px;
-  height: 70px;
+.white {
+  color: white;
 }
-
-
 
 #upload-section {
   margin-top: 40px;
   background-color: black;
-  height: 200px;
+
+}
+
+#upload-section label {
+  color: white;
 }
 
 
