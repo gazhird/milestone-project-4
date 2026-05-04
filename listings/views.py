@@ -60,6 +60,10 @@ def upload(request):
         )
         listing.save()
 
-        return redirect("listings:list")
+        return redirect("home")
 
     return render(request, "upload.html")
+
+def list_view(request):
+    listings = Listing.objects.all()
+    return render(request, "listings/index.html", {"listings": listings})
