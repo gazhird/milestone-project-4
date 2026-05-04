@@ -117,7 +117,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-6 notifications-section">
-            <div id="notifications" class="notifications">notifications</div>
+            <div id="notifications" class="notifications">
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
         <div class="col-6 clock-section">
             <div id="clock" class="clock">clock</div>

@@ -36,8 +36,7 @@ class Listing(models.Model):
     current_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
  
-    image1 = models.ImageField(upload_to="vehicles/")
-    # sample images here? 
+    image1 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
     image2 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
     image3 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
     image4 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
