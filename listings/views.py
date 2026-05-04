@@ -67,3 +67,10 @@ def upload(request):
 def list_view(request):
     listings = Listing.objects.all()
     return render(request, "listings/index.html", {"listings": listings})
+
+
+# show on home page
+def home(request):
+    listings = Listing.objects.all()
+    return render(request, "home.html", {"listings": listings})
+

@@ -6,3 +6,5 @@ def home(request):
 
 def upload(request):
     return render(request, 'upload.html')
+
+
