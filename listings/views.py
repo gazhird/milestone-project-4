@@ -22,11 +22,12 @@ def upload(request):
         description = request.POST.get("description")
         starting_price = request.POST.get("starting_price")
         reserve_price = request.POST.get("reserve_price")
-        ends_at = request.POST.get("ends_at")
+        end_date = request.POST.get("end_date")  # e.g. "2026-05-22"
+        end_time = request.POST.get("end_time")
 
 
-        ends_at_str = request.POST.get("ends_at")
-        ends_at = datetime.strptime(ends_at_str, "%Y-%m-%dT%H:%M")
+        ends_at_str = f"{end_date} {end_time}"
+        ends_at = datetime.strptime(ends_at_str, "%Y-%m-%d %H:%M")
         ends_at = timezone.make_aware(ends_at)
 
         # image1 = request.FILES.get("image1")
