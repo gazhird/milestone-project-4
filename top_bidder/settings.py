@@ -12,8 +12,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
 
 # Set as False for deployment on heroku
 # Collect staic before commit / pushing
+# python manage.py collectstatic
 # keep true in development as it auto serves the css 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
 
@@ -104,3 +105,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+# upload media 
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"

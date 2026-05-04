@@ -21,120 +21,127 @@
 
     <section id="upload-section" >
         <div class="container-fluid pt-4">
-            <h1>upload section....</h1> 
-            <form method="post" action="{% url 'listings:upload' %}" enctype="multipart/form-data">
+            <h1>Upload Vehicle</h1> 
+            <form method="post" action="{% url 'listings:upload' %}" enctype="multipart/form-data" class="upload-form">
                 {% csrf_token %}
                 
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="make" >Make</label>
+                        <input id="make" type="text" name="make" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="model" >Model</label>
+                        <input id="model" type="text" name="model" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="year" >Manufactured Year</label>
+                        <input id="year" type="number" name="year" required>
+                    </div>
+                
+                    <div class="form-group">
+                        <label for="registration" >Vehicle Registration</label>
+                        <input id="registration" type="text" name="registration" required>
+                </div>
+                </div>
 
-                <label for="make" >Make</label>
-                <br>
-                <input id="make" type="text" name="make" required>
-                
-                <br>
-                <label for="model" >Model</label>
-                <br>
-                <input id="model" type="text" name="model" required>
-                
-                <br>
-                <label for="year" >Manufactured Year</label>
-                <br>
-                <input id="year" type="number" name="year" required>
-                
-                <br>
-                <label for="registration" >Vehicle Registration</label>
-                <br>
-                <input id="registration" type="text" name="registration" required>
-                
-                <br>
-                <label for="mileage" >Mileage</label>
-                <br>
-                <input id="mileage" type="number" name="mileage" required>
-                
-                <br>
-                <label for="fuel" ></label>
-                <br>
-                <select name="fuel" id="fuel" required>
-                    <option value="">Select Fuel Type</option>
-                    <option value="petrol">Petrol</option>
-                    <option value="diesel">Diesel</option>
-                    <option value="electric">Electric</option>
-                    <option value="hybrid">Hybrid</option>
-                </select>
-                
-                <br>
-                <label for="transmission" ></label>
-                <br>
-                <select name="transmission" id="transmission" required>
-                    <option value="">Select Transmission</option>
-                    <option value="manual">Manual</option>
-                    <option value="automatic">Automatic</option>
-                </select>
-                
-                <br>
-                <label for="condition" ></label>
-                <br>
-                <select name="condition" id="condition" required>
-                    <option value="">Select Condition</option>
-                    <option value="excellent">Excellent</option>
-                    <option value="good">Good</option>
-                    <option value="average">Average</option>
-                    <option value="nonrunner">Non Runner</option>
-                </select>
-                <br>
-                <br>
-                <label for="colour" >Colour</label>
-                <br>
-                <input id="colour" type="text" name="colour" required>
-                
-                <br>
-                <label for="doors">Number of Doors</label>
-                <br>
-                <input id="doors" type="number" name="doors" required>
-                
-                <br>
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="mileage" >Mileage</label>
+                        <input id="mileage" type="number" name="mileage" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fuel" >Fuel Type</label>
+                            <select name="fuel" id="fuel" required>
+                            <option value="">Select Fuel Type</option>
+                            <option value="petrol">Petrol</option>
+                            <option value="diesel">Diesel</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                    <label for="transmission" >Transmission</label>
+                    <select name="transmission" id="transmission" required>
+                        <option value="">Select Transmission</option>
+                        <option value="manual">Manual</option>
+                        <option value="automatic">Automatic</option>
+                    </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                    <label for="condition" >Condition</label>
+                    <select name="condition" id="condition" required>
+                        <option value="">Select Condition</option>
+                        <option value="excellent">Excellent</option>
+                        <option value="good">Good</option>
+                        <option value="average">Average</option>
+                        <option value="nonrunner">Non Runner</option>
+                    </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="colour" >Colour</label>
+                        <input id="colour" type="text" name="colour" required>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="doors">Number of Doors</label>
+                        <input id="doors" type="number" name="doors" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
                 <label for="description" >Description</label>
-                <br>
                 <textarea id="description" name="description" required></textarea>
-                <br>
-                <label for="Auction_Buynow" ></label>
-                <br>
-                <select name="condition" id="Auction_Buynow" required>
-                    <option value="">Select Option</option>
-                    <option value="auction">Auction</option>
-                    <option value="buynow">Buy Now</option>
-                </select>
-                <br>
-                <br>
-                <label for="start_price" >Start Price</label>
-                <br>
-                <input id="start_price" type="number" name="starting_price" step="0.01" required>
-                <br>
-                <label for="end-time" >End Time</label>
-                <br>
-                <input id="end-time" type="datetime-local" name="ends_at" required>
-                <br>
-                <br>
+                </div>
+
+                <div class="form-row three-col">
+                    <div class="form-group">
+                        <label for="start_price" >Start Price</label>
+                        <input id="start_price" type="number" name="starting_price" step="0.01" required>
+                    </div>
 
 
+                    <div class="form-group">
+                        <label for="end-time" >End Time</label>
+                        <input id="end-time" type="datetime-local" name="ends_at" required>
+                    </div>
+                </div>
 
+
+                <div class="form-group">
                 <label for="image1" >Required Image</label>
-                <br>
                 <input id="image1" type="file" name="image1" accept="image/*" required>
-                <br>
+                </div>
+
+                <div class="form-group">
                 <label for="image2" >Optional Image</label>
-                <br>
                 <input id="image2" type="file" name="image2" accept="image/*">
-                <br>
+                </div>
+
+                <div class="form-group">
                 <label for="image3" >Optional Image</label>
-                <br>
                 <input id="image3" type="file" name="image3" accept="image/*">
-                <br>
+                </div>
+
+                <div class="form-group">
                 <label for="image4" >Optional Image</label>
-                <br>
                 <input id="image4" type="file" name="image4" accept="image/*">
-                <br>
-                <br>
-                <button type="submit">List Vehicle</button>
+                </div>
+
+                <div class="form-group">
+                <button type="submit" class="btn btn-primary">List Vehicle</button>
+                </div>
 
              </form>
         </div> 

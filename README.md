@@ -41,3 +41,24 @@ i have decided to keep this an Auctions site for vehicles only, i was considerin
 
 
 
+
+### Development Notes
+
+### Heroku 
+
+
+Migrate
+- python manage.py makemigrations 
+- python manage.py migrate
+
+CSS 
+- python manage.py collectstatic
+
+Commit 
+- heroku login
+- git push heroku main
+- heroku open
+
+
+Errors
+ - heroku logs --tail
