@@ -72,5 +72,5 @@ def list_view(request):
 # show on home page
 def home(request):
     listings = Listing.objects.all()
-    return render(request, "home.html", {"listings": listings})
+    return render(request, "index.html", {"listings": listings})
 

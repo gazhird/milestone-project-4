@@ -47,15 +47,17 @@
             <div class="row">
               {% for listing in listings %}
                     <div class="col-12">
-                        <h1><i class="fas fa-frog me-2"></i> {{ listing.make }} {{ listing.model }}</h1>
+                      <h1>???</h1>
+                        <h1>{{ listing.make }} {{ listing.model }}</h1>
                     </div>
               {% endfor %}
           {% else %}
                     <div class="col-12">
-                        <h1><i class="fas fa-frog me-2"></i>No vehicles..</h1>
+                        <h1>No vehicles..</h1>
                     </div>
+            </div>
           {% endif %}
-          </div>
+          
       </div>
     
     </main>
