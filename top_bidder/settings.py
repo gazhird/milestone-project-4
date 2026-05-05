@@ -11,10 +11,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
 
 # Set as False for deployment on heroku
-# Collect staic before commit / pushing
+# Collect static before commit / pushing
 # python manage.py collectstatic
-# keep true in development as it auto serves the css 
-DEBUG = True
+# keep true in development as it auto serves the css and best for error reports
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
 
@@ -73,14 +73,6 @@ DATABASES = {
     )
 }
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': 'your-cloud-name',
-    'API_KEY': 'your-api-key',
-    'API_SECRET': 'your-api-secret',
-}
-
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
 # Password validation
 # https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
 
@@ -118,11 +110,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
-# upload media 
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
-
-
 
 LOGGING = {
     'version': 1,
@@ -139,3 +126,16 @@ LOGGING = {
         },
     },
 }
+
+
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', 'dmdojvspx'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY', '785883381875157'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'), }
+
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+

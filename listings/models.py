@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from cloudinary.models import CloudinaryField
 
 
 
@@ -36,10 +37,11 @@ class Listing(models.Model):
     current_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
  
-    image1 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
-    image2 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
-    image3 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
-    image4 = models.ImageField(upload_to="vehicles/", blank=True, null=True)
+    
+    image1 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
+    image2 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
+    image3 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
+    image4 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
 
 
     created_at = models.DateTimeField(auto_now_add=True)

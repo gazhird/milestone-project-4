@@ -10,7 +10,7 @@ function liveClock() {
     const monthClock = d.getMonth();      
     const yearClock = d.getFullYear();  
     const hoursClock = d.getHours();
-    const minutesClock = d.getMinutes();
+    const minutesClock = d.getMinutes().toString().padStart(2, '0');
     const secondsClock = d.getSeconds().toString().padStart(2, '0');
 
     dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];

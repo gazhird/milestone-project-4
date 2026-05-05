@@ -47,8 +47,11 @@
             <div class="row">
               {% for listing in listings %}
                     <div class="col-12">
-                      <h1>???</h1>
+                      
                         <h1>{{ listing.make }} {{ listing.model }}</h1>
+
+                      <img src="{{ listing.image1.url }}" class="card-img-top" crossorigin="anonymous" width="400" height="300">
+
                     </div>
               {% endfor %}
           {% else %}

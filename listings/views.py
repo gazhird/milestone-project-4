@@ -30,10 +30,10 @@ def upload(request):
         ends_at = datetime.strptime(ends_at_str, "%Y-%m-%d %H:%M")
         ends_at = timezone.make_aware(ends_at)
 
-        # image1 = request.FILES.get("image1")
-        # image2 = request.FILES.get("image2")
-        # image3 = request.FILES.get("image3")
-        # image4 = request.FILES.get("image4")
+        image1 = request.FILES.get("image1")
+        image2 = request.FILES.get("image2")
+        image3 = request.FILES.get("image3")
+        image4 = request.FILES.get("image4")
 
         listing = Listing(
             make=make,
@@ -50,10 +50,10 @@ def upload(request):
             starting_price=starting_price,
             reserve_price=reserve_price,
             current_price=starting_price,
-            # image1=image1,
-            # image2=image2,
-            # image3=image3,
-            # image4=image4,
+            image1=image1,
+            image2=image2,
+            image3=image3,
+            image4=image4,
             ends_at=ends_at,
             seller=request.user,
             status="active"
