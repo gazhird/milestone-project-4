@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
 # Collect static before commit / pushing
 # python manage.py collectstatic
 # keep true in development as it auto serves the css and best for error reports
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
 
@@ -27,11 +27,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'accounts',
     'listings',
-    'cloudinary_storage',
-    'cloudinary',
+    
 ]
 
 MIDDLEWARE = [
@@ -108,6 +109,8 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+MEDIA_URL = '/media/' 
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 
@@ -128,14 +131,17 @@ LOGGING = {
 }
 
 
-
 CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME', 'dmdojvspx'),
+    'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
     'API_KEY': os.getenv('CLOUDINARY_API_KEY', '785883381875157'),
-    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'), }
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),}
 
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+import cloudinary
 
-
-
+cloudinary.config( 
+  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', 'dmdojvspx'), 
+  api_key = os.getenv('CLOUDINARY_API_KEY', '785883381875157'), 
+  api_secret = os.getenv('CLOUDINARY_API_SECRET'),
+  secure = True
+)

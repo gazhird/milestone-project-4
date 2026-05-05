@@ -18,6 +18,12 @@
 //     document.getElementById('select-category').addEventListener('change', showCategory);
     
     
+
+
+
+
+
+
 // screen size displayer (Viewport) temp 
 function showWidth() {
     document.body.setAttribute('data-width', window.innerWidth + 'px');

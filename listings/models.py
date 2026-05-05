@@ -64,4 +64,4 @@ class Listing(models.Model):
         ordering = ["-created_at"]
 
     def __str__(self):
-        return f"{self.year} {self.make} {self.model}"
+        return f"{self.make or 'No Make'} {self.model or 'No Model'}"
