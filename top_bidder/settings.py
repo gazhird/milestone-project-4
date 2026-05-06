@@ -14,7 +14,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
 # Collect static before commit / pushing
 # python manage.py collectstatic
 # keep true in development as it auto serves the css and best for error reports
-DEBUG = True
+DEBUG = False   # false for heroku commit!!!
+
+
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
 

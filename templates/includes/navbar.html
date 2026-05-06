@@ -14,7 +14,7 @@
                 
                 {% if user.is_authenticated %}
                 <li class="nav-item">
-                <a class="link" href="{% url 'listings:upload' %}"><i class="fa-solid fa-upload mr-1"></i>Upload</a>
+                <a class="link" href="{% url 'upload' %}"><i class="fa-solid fa-upload mr-1"></i>Upload</a>
                 </li>
 
                 <li class="nav-item">
@@ -116,16 +116,12 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6 notifications-section">
-            <div id="notifications" class="notifications">
-                {% if messages %}
-                    {% for message in messages %}
-                        <div class="">notification</div>
-                    {% endfor %}
-                {% endif %}
+        <div class="col-12 col-md-6 notifications-section">
+            <div id="notifications" class="notifications jcc">
+                <div class="">notifications here</div>
             </div>
         </div>
-        <div class="col-6 clock-section jcc">
+        <div class="col-12 col-md-6 clock-section jcc">
             <div id="clock" class="clock">clock</div>
         </div>
     </div>

@@ -171,8 +171,10 @@ padding-right: 3px;
 
 /* notifications */
 .notifications-section {
-  background-color: aqua;
+  background-color: red;
 }
+
+
 
 /* clock */
 .clock-section {
@@ -195,7 +197,7 @@ padding-right: 3px;
 
  #home-listings img {
   /* Top, right, bottom, left */
-  padding: 0px 0px 5px 0px; 
+  padding: 5px 0px 5px 0px; 
  }
 
  #home-listings .img-box {
@@ -232,15 +234,22 @@ padding-right: 3px;
   
 } 
 
-  
 
+/* image modal */
 
-.left-side {
-  background-color: blue;
-  height: 900px;
+.modal-header, 
+.modal-body, 
+.modal-footer {
+  background-color: black;
 }
 
+.modal-body {
+  padding: 0px;
+}
 
+.btn-danger {
+  background-color: red;
+}
 
 
 /* Upload form page */
