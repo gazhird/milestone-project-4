@@ -13,7 +13,7 @@ function liveClock() {
     const minutesClock = d.getMinutes().toString().padStart(2, '0');
     const secondsClock = d.getSeconds().toString().padStart(2, '0');
 
-    dayArray = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    dayArray = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     monthArray = ['Jan','Feb','March','April','May','June','July','August','Sep','Oct','Nov','Dec'];
 
     function dateDressing(dateClock) {

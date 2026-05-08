@@ -77,4 +77,4 @@ def home(request):
 # vehicle detail page request
 def vehicle_detail(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id)
-    return render(request, 'listings/vehicle.html', {'listing': listing})
+    return render(request, 'vehicle.html', {'listing': listing})

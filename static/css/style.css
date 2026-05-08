@@ -13,7 +13,6 @@
 
 h1 {
     color: red;
-    font-size: 22px;
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -27,8 +26,7 @@ h1 {font-size: 26px;}
 h2 {font-size: 24px;}
 h3 {font-size: 18px;}
 h4 {font-size: 16px;}
-p  {font-size: 16px;
-    color: black;}
+p  {color: white;}
 
 .black {
     color: black;
@@ -189,7 +187,7 @@ padding-right: 3px;
  #home-listings {
   margin-top: 20px;
   background-color: black;
-  height: 1000px;
+  min-height: 1000px;
   color: white;
   font-weight: 700;
 }
@@ -236,6 +234,7 @@ padding-right: 3px;
 
 
 /* image modal */
+
 
 .modal-header, 
 .modal-body, 
@@ -306,13 +305,7 @@ padding-right: 3px;
 
 
 
-
-
-
-
-
-
-/* Media Query
+/* Media Query */
 
 
 /*  576px and up (mobile rotate larger text) */

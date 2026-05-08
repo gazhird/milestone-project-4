@@ -67,7 +67,7 @@
                         <a href="{% url 'vehicle' listing.id %}" class="text-decoration-none text-dark">
                             <h4>{{ listing.make }} {{ listing.model }} {{listing.year}}</h4>
                         </a>
-                            <div id="countdown" >countdown..</div>
+                            <div id="countdown">countdown..</div>
                             <h3>£{{listing.starting_price}}</h3>
                       </div>  
                     </div>
@@ -113,6 +113,9 @@
       </div>
   </section>
     </main>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/time.js' %}" ></script>
     <script src="{% static 'js/main.js' %}" ></script>
