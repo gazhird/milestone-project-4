@@ -1,14 +1,25 @@
-/* body {
-    background-color: black;
-} */
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fjalla+One&display=swap');
 
-
+.fonts {
+    font-family: "Fjalla One", sans-serif;
+    font-family: "Bebas Neue", sans-serif;
+}
 
 .jcc {
  display: flex;
  justify-content: center;
 }
 
+.right {
+ text-align: right;}
+
+.inline {
+ display: inline-flex;
+}
+.ruby {
+ display: ruby;
+}
 
 
 h1 {
@@ -192,15 +203,8 @@ padding-right: 3px;
   font-weight: 700;
 }
 
-
- #home-listings img {
-  /* Top, right, bottom, left */
-  padding: 5px 0px 5px 0px; 
- }
-
- #home-listings .img-box {
- /* Top, right, bottom, left */
-  padding: 0px 0px 5px 8px; 
+#home-listings img {
+  padding: 4px 0px 0px 4px;
 }
 
  #home-listings .details-box {
@@ -301,8 +305,47 @@ padding-right: 3px;
 }
 
 
+/* vehicle details */
+
+#vehicle-details {
+background-color: black;
+}
+
+#vehicle-details img {
+  min-height: 240px;
+  max-height: 240px;
+}
 
 
+#vehicle-details h2,
+#vehicle-details h3,
+#vehicle-details h4   {
+  color: white;
+  text-transform: capitalize;
+}
+
+.img-box {
+  position: relative;
+  display: inline-block; 
+  width: 100%
+}
+
+#imgNum {
+  position: absolute;
+  bottom: 4px;
+  right: 18px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 5px 15px;
+  border-radius: 20px;
+}
+
+#imgNum h2 {
+margin-bottom: 0;
+}
+
+#vehicle-details a {
+  color: white;
+}
 
 
 /* Media Query */

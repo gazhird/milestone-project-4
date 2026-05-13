@@ -22,7 +22,7 @@ def upload(request):
         description = request.POST.get("description")
         starting_price = request.POST.get("starting_price")
         reserve_price = request.POST.get("reserve_price")
-        end_date = request.POST.get("end_date")  # e.g. "2026-05-22"
+        end_date = request.POST.get("end_date")
         end_time = request.POST.get("end_time")
 
 

@@ -36,3 +36,52 @@ function liveClock() {
 
     liveClock();
     setInterval(liveClock, 1000);
+
+
+
+
+
+
+
+
+
+
+// Auction multiple countdown for index.html 
+
+function indexCountdowns() {
+    const timers = document.querySelectorAll('.auction-timer');
+
+    timers.forEach(timer => {
+        const deadline = new Date(timer.getAttribute('data-deadline')).getTime();
+
+        const interval = setInterval(function() {
+            const now = new Date().getTime();
+            const gap = deadline - now;
+
+            
+            if (gap <= 0) {
+                clearInterval(interval);
+                timer.innerHTML = "Ended";
+                return;
+            }
+
+            const days = Math.floor(gap / 86400000);
+            const hours = Math.floor((gap % 86400000) / 3600000);
+            const minutes = Math.floor((gap % 3600000) / 60000);
+            const seconds = Math.floor((gap % 60000) / 1000);
+
+
+            // hide seconds if over 1 hour
+            if (gap > 3600000) {
+                timer.innerHTML = days + "d " + hours + "h " + minutes + "m";
+            } else {
+            // show seconds under 1 hour
+                timer.innerHTML = minutes + "m " + seconds + "s";
+                timer.classList.add('text-danger');
+            }
+
+        }, 1000);
+    });
+}
+
+window.onload = indexCountdowns;

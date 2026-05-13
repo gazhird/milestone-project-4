@@ -22,7 +22,7 @@
     <section id="upload-section" >
         <div class="container-fluid pt-4">
             <h1>Upload Vehicle</h1> 
-            <form method="post" action="{% url 'listings:upload' %}" enctype="multipart/form-data" class="upload-form">
+            <form method="post" action="{% url 'upload' %}" enctype="multipart/form-data" class="upload-form">
                 {% csrf_token %}
                 
                 <div class="form-row">
