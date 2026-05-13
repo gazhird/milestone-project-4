@@ -62,7 +62,7 @@ def upload(request):
 
         return redirect("home")
 
-    return render(request, "upload.html")
+    return render(request, "my_listings.html")
 
 def list_view(request):
     listings = Listing.objects.all()

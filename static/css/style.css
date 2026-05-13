@@ -254,8 +254,18 @@ padding-right: 3px;
   background-color: red;
 }
 
+/* my listings page */
 
-/* Upload form page */
+#myListings {
+ margin-top: 40px;
+ background-color: black;
+ color: white;
+ font-weight: 700;
+ padding: 10px;
+}
+
+
+/* Upload form section my listings page */
 
 #upload-section {
   margin-top: 40px;

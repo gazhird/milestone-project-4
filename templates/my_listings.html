@@ -19,10 +19,38 @@
     <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
+    <section id="myListings" >
+        <div class="container-fluid pt-4">
+            <div class="row">
+                <div class="col-12">
+                  <select id="select-section" class="form-select" >
+                    <option value="view" >View Listing</option>
+                    <option value="upload" >Upload Listing</option>
+                    <option value="edit" >Edit Listing</option>
+                    <option value="delete" >Delete Listing</option> 
+
+
+                  </select>
+                </div> 
+            </div>
+            <div class="row">
+              <div id="view" class="section-display">View Listing</div>
+              <div id="upload" class="section-display">Upload Listing</div>
+              <div id="edit" class="section-display">Edit Listing</div>
+              <div id="delete" class="section-display">Delete Listing</div>
+    
+            </div>
+        </div> 
+    </section>
+
+
+
+
+
     <section id="upload-section" >
         <div class="container-fluid pt-4">
             <h1>Upload Vehicle</h1> 
-            <form method="post" action="{% url 'upload' %}" enctype="multipart/form-data" class="upload-form">
+            <form method="post" action="{% url 'my_listings' %}" enctype="multipart/form-data" class="upload-form">
                 {% csrf_token %}
                 
                 <div class="form-row">
@@ -161,5 +189,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/time.js' %}" ></script>
     <script src="{% static 'js/main.js' %}" ></script>
+    <script src="{% static 'js/myListings.js' %}" ></script>
 </body>
 </html>
