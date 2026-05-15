@@ -19,168 +19,385 @@
     <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
-    <section id="myListings" >
-        <div class="container-fluid pt-4">
-            <div class="row">
-                <div class="col-12">
-                  <select id="select-section" class="form-select" >
-                    <option value="view" >View Listing</option>
-                    <option value="upload" >Upload Listing</option>
-                    <option value="edit" >Edit Listing</option>
-                    <option value="delete" >Delete Listing</option> 
-
-
-                  </select>
-                </div> 
-            </div>
-            <div class="row">
-              <div id="view" class="section-display">View Listing</div>
-              <div id="upload" class="section-display">Upload Listing</div>
-              <div id="edit" class="section-display">Edit Listing</div>
-              <div id="delete" class="section-display">Delete Listing</div>
-    
-            </div>
-        </div> 
-    </section>
-
-
-
-
-
-    <section id="upload-section" >
-        <div class="container-fluid pt-4">
-            <h1>Upload Vehicle</h1> 
-            <form method="post" action="{% url 'my_listings' %}" enctype="multipart/form-data" class="upload-form">
-                {% csrf_token %}
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="make" >Make</label>
-                        <input id="make" type="text" name="make" required>
-                    </div>
+    <section id="myListings">
+        <div class="container-fluid">
                     
-                    <div class="form-group">
-                        <label for="model" >Model</label>
-                        <input id="model" type="text" name="model" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="year" >Manufactured Year</label>
-                        <input id="year" type="number" name="year" required>
-                    </div>
-                
-                    <div class="form-group">
-                        <label for="registration" >Vehicle Registration</label>
-                        <input id="registration" type="text" name="registration" required>
-                </div>
-                </div>
-
-                <div class="form-row three-col">
-                    <div class="form-group">
-                        <label for="mileage" >Mileage</label>
-                        <input id="mileage" type="number" name="mileage" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fuel" >Fuel Type</label>
-                            <select name="fuel" id="fuel" required>
-                            <option value="">Select Fuel Type</option>
-                            <option value="petrol">Petrol</option>
-                            <option value="diesel">Diesel</option>
-                            <option value="electric">Electric</option>
-                            <option value="hybrid">Hybrid</option>
-                        </select>
-                    </div>
-    
-                    <div class="form-group">
-                    <label for="transmission" >Transmission</label>
-                    <select name="transmission" id="transmission" required>
-                        <option value="">Select Transmission</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatic">Automatic</option>
-                    </select>
-                    </div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                    <label for="condition" >Condition</label>
-                    <select name="condition" id="condition" required>
-                        <option value="">Select Condition</option>
-                        <option value="excellent">Excellent</option>
-                        <option value="good">Good</option>
-                        <option value="average">Average</option>
-                        <option value="nonrunner">Non Runner</option>
-                    </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="colour" >Colour</label>
-                        <input id="colour" type="text" name="colour" required>
-                    </div>
+                    
+                    <button data-bs-toggle="collapse" data-bs-target="#view">View</button>
+                    <button data-bs-toggle="collapse" data-bs-target="#upload">Upload</button>
+                    <button data-bs-toggle="collapse" data-bs-target="#edit">Edit</button>
 
 
-                    <div class="form-group">
-                        <label for="doors">Number of Doors</label>
-                        <input id="doors" type="number" name="doors" required>
-                    </div>
-                </div>
 
-                <div class="form-group">
-                <label for="description" >Description</label>
-                <textarea id="description" name="description" required></textarea>
-                </div>
+                    <!-- View listings -->
+                    <div id="view" class="collapse pt-3">
+                        <div class="row">
+                            <h1>My Listings</h1>
+                            {% for listing in listings %}
+                                <div class="col-md-4 col-sm-6 mb-4">
+                                    <div class="card">
 
-                <div class="form-row three-col">
-                    <div class="form-group">
-                        <label for="start_price" >Start Price</label>
-                        <input id="start_price" type="number" name="starting_price" step="0.01" required>
-                    </div>
+                                        <div class="card-header jcc">
+                                            <h5 class="card-title">{{ listing.make }} {{ listing.model }}</h5>
+                                        </div>
+                                        
 
 
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="end_date">End Date</label>
-                            <input id="end_date" type="date" name="end_date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="end_time">End Time</label>
-                            <input id="end_time" type="time" name="end_time" required>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                
+                                                    {% if listing.image1 %}
+                                                        <img src="{{ listing.image1.url }}" class="img-fluid rounded pb-2" 
+                                                        alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
+                                                        data-bs-toggle="modal"  data-bs-target="#imageModal{{ listing.id }}">
+                                                    {% else %}
+                                                        <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
+                                                    {% endif %}
+                                                
+                                            </div>
+                                            
+                                            
+                                        </div>
+                                        
+                                        
+                                        <div class="card-footer">
+                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ listing.id }}">Edit</button>
+                                                    <button class="btn btn-danger">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            {% empty %}
+                                <div class="col-12">
+                                    <p>You have no listings.</p>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                <label for="image1" >Required Image</label>
-                <input id="image1" type="file" name="image1" accept="image/*" required>
-                </div>
+                    
+                    <!-- upload  -->
+                    <div id="upload" class="collapse pt-3">
+                        <div class="row">
+                            <h1>Upload Listings</h1> 
+                                <form method="post" action="{% url 'my_listings' %}" enctype="multipart/form-data" class="upload-form">
+                                    {% csrf_token %}
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="make" >Make</label>
+                                            <input id="make" type="text" name="make" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="model" >Model</label>
+                                            <input id="model" type="text" name="model" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="year" >Manufactured Year</label>
+                                            <input id="year" type="number" name="year" required>
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="registration" >Vehicle Registration</label>
+                                            <input id="registration" type="text" name="registration" required>
+                                    </div>
+                                    </div>
 
-                <div class="form-group">
-                <label for="image2" >Optional Image</label>
-                <input id="image2" type="file" name="image2" accept="image/*">
-                </div>
+                                    <div class="form-row three-col">
+                                        <div class="form-group">
+                                            <label for="mileage" >Mileage</label>
+                                            <input id="mileage" type="number" name="mileage" required>
+                                        </div>
 
-                <div class="form-group">
-                <label for="image3" >Optional Image</label>
-                <input id="image3" type="file" name="image3" accept="image/*">
-                </div>
+                                        <div class="form-group">
+                                            <label for="fuel" >Fuel Type</label>
+                                                <select name="fuel" id="fuel" required>
+                                                <option value="">Select Fuel Type</option>
+                                                <option value="petrol">Petrol</option>
+                                                <option value="diesel">Diesel</option>
+                                                <option value="electric">Electric</option>
+                                                <option value="hybrid">Hybrid</option>
+                                            </select>
+                                        </div>
+                        
+                                        <div class="form-group">
+                                        <label for="transmission" >Transmission</label>
+                                        <select name="transmission" id="transmission" required>
+                                            <option value="">Select Transmission</option>
+                                            <option value="manual">Manual</option>
+                                            <option value="automatic">Automatic</option>
+                                        </select>
+                                        </div>
+                                    </div>
 
-                <div class="form-group">
-                <label for="image4" >Optional Image</label>
-                <input id="image4" type="file" name="image4" accept="image/*">
-                </div>
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                        <label for="condition" >Condition</label>
+                                        <select name="condition" id="condition" required>
+                                            <option value="">Select Condition</option>
+                                            <option value="excellent">Excellent</option>
+                                            <option value="good">Good</option>
+                                            <option value="average">Average</option>
+                                            <option value="nonrunner">Non Runner</option>
+                                        </select>
+                                        </div>
 
-                <div class="form-group">
-                <button type="submit" class="btn btn-primary">List Vehicle</button>
-                </div>
+                                        <div class="form-group">
+                                            <label for="colour" >Colour</label>
+                                            <input id="colour" type="text" name="colour" required>
+                                        </div>
 
-             </form>
-        </div> 
+
+                                        <div class="form-group">
+                                            <label for="doors">Number of Doors</label>
+                                            <input id="doors" type="number" name="doors" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="description" >Description</label>
+                                    <textarea id="description" name="description" required></textarea>
+                                    </div>
+
+                                    <div class="form-row three-col">
+                                        <div class="form-group">
+                                            <label for="start_price" >Start Price</label>
+                                            <input id="start_price" type="number" name="starting_price" step="0.01" required>
+                                        </div>
+
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="end_date">End Date</label>
+                                                <input id="end_date" type="date" name="end_date" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="end_time">End Time</label>
+                                                <input id="end_time" type="time" name="end_time" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image1" >Required Image</label>
+                                    <input id="image1" type="file" name="image1" accept="image/*" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image2" >Optional Image</label>
+                                    <input id="image2" type="file" name="image2" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image3" >Optional Image</label>
+                                    <input id="image3" type="file" name="image3" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image4" >Optional Image</label>
+                                    <input id="image4" type="file" name="image4" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">List Vehicle</button>
+                                    </div>
+
+                                </form>
+                            </div> 
+                    </div>
+
+                    
+                    <!-- <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
+
+                    <div id="demo" class="collapse">
+                    Lorem ipsum dolor text....
+                    </div> -->
+
+
+
+                    <!-- edit -->
+                    <div id="edit" class="collapse pt-4">
+                    <div class="row">
+                            <h1>Edit Listings</h1> 
+                                
+                                    <!-- select test -->
+                                    <select id="vehicleEditSelector" class="form-select bg-black text-white border-secondary">
+                                        <option value="" selected disabled>Select Vehicle</option>
+                                        {% for listing in listings %}
+                                            <option value="{{ listing.id }}" data-make="{{ listing.make }}" data-model="{{ listing.model }}">{{ listing.make }} {{ listing.model }}</option>
+                                        {% empty %}
+                                            <option value="">No Vehicles</option>
+                                        {% endfor %}
+                                    </select>
+                                    <!-- select test -->
+
+                                <div id="editForm">
+                                    <form action="{% url 'edit_listing' %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-row">
+
+                                        <!-- hidden value for ID -->
+                                        <input id="edit_id" type="hidden" name="edit_id" >
+
+                                        <div class="form-group">
+                                            <label for="make" >Make</label>
+                                            <input id="edit_make" type="text" name="edit_make" required>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <label for="model" >Model</label>
+                                            <input id="edit_model" type="text" name="edit_model" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="year" >Manufactured Year</label>
+                                            <input id="edit_year" type="number" name="edit_year" required>
+                                        </div>
+                                    
+                                        <div class="form-group">
+                                            <label for="registration" >Vehicle Registration</label>
+                                            <input id="edit_registration" type="text" name="edit_registration" required>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-row three-col">
+                                        <div class="form-group">
+                                            <label for="mileage" >Mileage</label>
+                                            <input id="edit_mileage" type="number" name="edit_mileage" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="fuel" >Fuel Type</label>
+                                                <select name="edit_fuel" id="edit_fuel" required>
+                                                <option value="">Select Fuel Type</option>
+                                                <option value="petrol">Petrol</option>
+                                                <option value="diesel">Diesel</option>
+                                                <option value="electric">Electric</option>
+                                                <option value="hybrid">Hybrid</option>
+                                            </select>
+                                        </div>
+                        
+                                        <div class="form-group">
+                                        <label for="transmission" >Transmission</label>
+                                        <select name="edit_transmission" id="edit_transmission" required>
+                                            <option value="">Select Transmission</option>
+                                            <option value="manual">Manual</option>
+                                            <option value="automatic">Automatic</option>
+                                        </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                        <label for="condition" >Condition</label>
+                                        <select name="edit_condition" id="edit_condition" required>
+                                            <option value="">Select Condition</option>
+                                            <option value="excellent">Excellent</option>
+                                            <option value="good">Good</option>
+                                            <option value="average">Average</option>
+                                            <option value="nonrunner">Non Runner</option>
+                                        </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="colour" >Colour</label>
+                                            <input id="edit_colour" type="text" name="edit_colour" required>
+                                        </div>
+
+
+                                        <div class="form-group">
+                                            <label for="doors">Number of Doors</label>
+                                            <input id="edit_doors" type="number" name="edit_doors" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="description" >Description</label>
+                                    <textarea id="edit_description" name="edit_description" required></textarea>
+                                    </div>
+
+                                    <div class="form-row three-col">
+                                        <div class="form-group">
+                                            <label for="start_price" >Start Price</label>
+                                            <input id="edit_start_price" type="number" name="edit_starting_price" step="0.01" required>
+                                        </div>
+
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="end_date">End Date</label>
+                                                <input id="edit_end_date" type="date" name="edit_end_date" required>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="end_time">End Time</label>
+                                                <input id="edit_end_time" type="time" name="edit_end_time" required>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image1" >Required Image</label>
+                                    <input id="edit_image1" type="file" name="edit_image1" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image2" >Optional Image</label>
+                                    <input id="edit_image2" type="file" name="edit_image2" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image3" >Optional Image</label>
+                                    <input id="edit_image3" type="file" name="edit_image3" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <label for="image4" >Optional Image</label>
+                                    <input id="edit_image4" type="file" name="edit_image4" accept="image/*">
+                                    </div>
+
+                                    <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">List Vehicle</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div> 
+                    </div>
+                    </div>
+              
+            </div>
     </section>
 
+
+    <script>
+        document.getElementById('vehicleEditSelector').addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+
+            if (this.value) {
+                
+                document.getElementById('edit_id').value = this.value;
+                document.getElementById('edit_make').value = selectedOption.getAttribute('data-make');
+                document.getElementById('edit_model').value = selectedOption.getAttribute('data-model');
+                // document.getElementById('form_price').value = selectedOption.getAttribute('data-price');
+                // document.getElementById('form_desc').value = selectedOption.getAttribute('data-desc');
+                
+            }
+        });
+
+
+    </script>
+
+
+    
 
     
 
@@ -188,7 +405,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/time.js' %}" ></script>
-    <script src="{% static 'js/main.js' %}" ></script>
     <script src="{% static 'js/myListings.js' %}" ></script>
 </body>
-</html>
+</html

@@ -5,6 +5,6 @@ def home(request):
     return render(request, 'index.html')
 
 def upload(request):
-    return render(request, 'upload.html')
+    return render(request, 'my_listings.html')
 
 

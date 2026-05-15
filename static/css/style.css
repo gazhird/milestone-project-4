@@ -267,7 +267,7 @@ padding-right: 3px;
 
 /* Upload form section my listings page */
 
-#upload-section {
+#myListings {
   margin-top: 40px;
   background-color: black;
   color: white;
@@ -275,7 +275,13 @@ padding-right: 3px;
 
 }
 
-#upload-section label {
+#myListings h5 {
+ text-transform: capitalize; 
+}
+
+
+
+.section-display label {
   color: white;
 }
 
@@ -313,6 +319,9 @@ padding-right: 3px;
 .form-group textarea {
   min-height: 100px;
 }
+
+
+
 
 
 /* vehicle details */
