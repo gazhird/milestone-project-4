@@ -14,7 +14,7 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
 # Collect static before commit / pushing
 # python manage.py collectstatic
 # keep true in development as it auto serves the css and best for error reports
-DEBUG = False   # false for heroku commit!!!
+DEBUG = True   # false for heroku commit!!!
 
 
 

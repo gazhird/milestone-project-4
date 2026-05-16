@@ -227,11 +227,20 @@
                     <div class="row">
                             <h1>Edit Listings</h1> 
                                 
-                                    <!-- select test -->
+<!------------------------------------------------------------------------------------------------ select test -->
                                     <select id="vehicleEditSelector" class="form-select bg-black text-white border-secondary">
                                         <option value="" selected disabled>Select Vehicle</option>
                                         {% for listing in listings %}
-                                            <option value="{{ listing.id }}" data-make="{{ listing.make }}" data-model="{{ listing.model }}">{{ listing.make }} {{ listing.model }}</option>
+                                            <option value="{{ listing.id }}" 
+                                            data-make="{{ listing.make }}" data-model="{{ listing.model }}"
+                                            data-year="{{ listing.year }}" data-registration="{{ listing.registration }}"
+                                            data-mileage="{{ listing.mileage }}" data-fuel="{{ listing.fuel }}"
+                                            data-transmission="{{ listing.transmission }}" data-condition="{{ listing.condition }}"
+                                            data-colour="{{ listing.colour }}" data-doors="{{ listing.doors }}"
+                                            data-description="{{ listing.description }}" data-start_price="{{ listing.starting_price }}"
+                                            data_end_date="{{ listing.ends_at|date:'Y-m-d' }}" data_end_time="{{ listing.ends_at|date:'H:i' }}"
+                                            
+                                            >{{ listing.make }} {{ listing.model }}</option>
                                         {% empty %}
                                             <option value="">No Vehicles</option>
                                         {% endfor %}
@@ -328,7 +337,7 @@
                                     <div class="form-row three-col">
                                         <div class="form-group">
                                             <label for="start_price" >Start Price</label>
-                                            <input id="edit_start_price" type="number" name="edit_starting_price" step="0.01" required>
+                                            <input id="edit_start_price" type="number" name="edit_start_price" step="0.01" required>
                                         </div>
 
 
@@ -387,8 +396,19 @@
                 document.getElementById('edit_id').value = this.value;
                 document.getElementById('edit_make').value = selectedOption.getAttribute('data-make');
                 document.getElementById('edit_model').value = selectedOption.getAttribute('data-model');
-                // document.getElementById('form_price').value = selectedOption.getAttribute('data-price');
-                // document.getElementById('form_desc').value = selectedOption.getAttribute('data-desc');
+                document.getElementById('edit_year').value = selectedOption.getAttribute('data-year');
+                document.getElementById('edit_registration').value = selectedOption.getAttribute('data-registration');
+                document.getElementById('edit_mileage').value = selectedOption.getAttribute('data-mileage');
+                document.getElementById('edit_fuel').value = selectedOption.getAttribute('data-fuel');
+                document.getElementById('edit_transmission').value = selectedOption.getAttribute('data-transmission');
+                document.getElementById('edit_condition').value = selectedOption.getAttribute('data-condition');
+                document.getElementById('edit_colour').value = selectedOption.getAttribute('data-colour');
+                document.getElementById('edit_doors').value = selectedOption.getAttribute('data-doors');
+                document.getElementById('edit_description').value = selectedOption.getAttribute('data-description');
+                document.getElementById('edit_start_price').value = selectedOption.getAttribute('data-start_price');
+                document.getElementById('edit_end_date').value = selectedOption.getAttribute('data_end_date');
+                document.getElementById('edit_end_time').value = selectedOption.getAttribute('data_end_time');
+
                 
             }
         });
