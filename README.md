@@ -44,6 +44,17 @@ i have decided to keep this an Auctions site for vehicles only, i was considerin
 
 ### Development Notes
 
+## Listing status
+
+Small issue with the listing status column not auto changing from 'Active' to 'Ended' 
+i will have to trigger this when a user clicks to view its details and secondary if a user try's to bid on a listing that has already ended 
+
+When a vehicle detail is requested. i have place a check 'is_expired' in vehicle details function / views.py and then a conditional statement in the html to show or hide the bidding box depending on the end time not the status column as planned. 
+
+Final if_expired check made as bids are submitted 
+
+
+
 ### Heroku 
 
 

@@ -1,7 +1,7 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from cloudinary.models import CloudinaryField
-
 
 
 class Listing(models.Model):
@@ -37,7 +37,6 @@ class Listing(models.Model):
     current_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
  
-    
     image1 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
     image2 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
     image3 = CloudinaryField('image', folder='top_bidder/vehicles/', blank=True, null=True)
@@ -62,6 +61,11 @@ class Listing(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+    @property
+    def is_expired(self):
+        #  return true if expired
+        return timezone.now() > self.ends_at
 
     def __str__(self):
         return f"{self.make or 'No Make'} {self.model or 'No Model'}"

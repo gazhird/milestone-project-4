@@ -78,6 +78,17 @@ def home(request):
 # vehicle detail page request
 def vehicle_detail(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id)
+
+    # update status column from active to ended
+    if listing.is_expired and listing.status == "active":
+        listing.status = "ended"
+        listing.save(update_fields=['status'])
+
+    context = {
+        'listing': listing,
+        'is_expired': listing.is_expired, 
+    }
+
     return render(request, 'vehicle.html', {'listing': listing})
 
 
@@ -125,3 +136,33 @@ def edit_listing(request):
         listing.save()
         return redirect('my_listings')
 
+
+@login_required
+def delete_listing(request, listing_id):
+    listing = get_object_or_404(Listing, id=listing_id)
+    
+    if listing.seller == request.user:
+        listing.delete()
+        
+    return redirect('my_listings')
+
+
+
+@login_required
+def place_bid(request, listing_id):
+    if request.method == "POST":
+        listing = get_object_or_404(Listing, id=listing_id)
+        
+        # check item not expired before bid submitted
+        if listing.is_expired:
+            if listing.status == "active":
+                listing.status = "ended"
+                listing.save(update_fields=['status'])
+                
+            # stop the user from bidding
+            messages.error(request, "This auction has already ended!")
+            return redirect('vehicle_detail', listing_id=listing.id)
+            
+        bid_amount = float(request.POST.get("bid_amount", 0))
+        
+        return redirect('vehicle_detail', listing_id=listing.id)

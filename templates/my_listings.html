@@ -40,12 +40,9 @@
                                         <div class="card-header jcc">
                                             <h5 class="card-title">{{ listing.make }} {{ listing.model }}</h5>
                                         </div>
-                                        
-
 
                                         <div class="card-body">
                                             <div class="row">
-                                                
                                                     {% if listing.image1 %}
                                                         <img src="{{ listing.image1.url }}" class="img-fluid rounded pb-2" 
                                                         alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
@@ -53,26 +50,51 @@
                                                     {% else %}
                                                         <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
                                                     {% endif %}
-                                                
                                             </div>
-                                            
-                                            
                                         </div>
                                         
-                                        
                                         <div class="card-footer">
+                                            <!-- edit button -->
                                             <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ listing.id }}">Edit</button>
-                                                    <button class="btn btn-danger">Delete</button>
+                                            <!-- delete button  -->
+                                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ listing.id }}">
+                                                Delete
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
 
-
+                                    <!-- delete confirm modal -->
+                                    <div class="modal fade" id="deleteModal{{ listing.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="deleteModalLabel">Confirm Deletion</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body confirm-delete">
+                                                    <h5 class="">Are You Sure You Want To Delete<br><br> {{ listing.make }} {{ listing.model }}?</h5>
+                                                </div>
+                                                <div class="modal-footer ">
+                                                    <!-- Cancel button just closes the modal safely -->
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    
+                                                    <!-- The real POST form that handles the actual destruction -->
+                                                    <form action="{% url 'delete_listing' listing.id %}" method="POST" class="d-inline">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
                             {% empty %}
                                 <div class="col-12">
                                     <p>You have no listings.</p>
                                 </div>
+
+                                
                             {% endfor %}
                         </div>
                     </div>
@@ -214,20 +236,12 @@
                     </div>
 
                     
-                    <!-- <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
-
-                    <div id="demo" class="collapse">
-                    Lorem ipsum dolor text....
-                    </div> -->
-
-
-
                     <!-- edit -->
                     <div id="edit" class="collapse pt-4">
                     <div class="row">
                             <h1>Edit Listings</h1> 
                                 
-<!------------------------------------------------------------------------------------------------ select test -->
+                                <!------ select for vehicle to edit -->
                                     <select id="vehicleEditSelector" class="form-select bg-black text-white border-secondary">
                                         <option value="" selected disabled>Select Vehicle</option>
                                         {% for listing in listings %}
@@ -249,10 +263,10 @@
                                             <option value="">No Vehicles</option>
                                         {% endfor %}
                                     </select>
-                                    <!-- select test -->
 
+                                <!-- edit form -->
                                 <div id="editForm">
-                                    <form action="{% url 'edit_listing' %}" method="POST">
+                                    <form action="{% url 'edit_listing' %}" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="form-row">
 
@@ -386,8 +400,8 @@
                                     <input id="edit_image4" type="file" name="edit_image4" accept="image/*">
                                     </div>
 
-                                    <div class="form-group pb-3">
-                                    <button type="submit" class="btn btn-primary">List Vehicle</button>
+                                    <div class="form-group pb-3 pt-3">
+                                    <button type="submit" class="btn btn-primary">Edit Vehicle</button>
                                     </div>
 
                                 </form>
@@ -399,56 +413,6 @@
             </div>
     </section>
 
-
-    <script>
-        document.getElementById('vehicleEditSelector').addEventListener('change', function() {
-            const selectedOption = this.options[this.selectedIndex];
-
-            if (this.value) {
-                
-                document.getElementById('edit_id').value = this.value;
-                document.getElementById('edit_make').value = selectedOption.getAttribute('data-make');
-                document.getElementById('edit_model').value = selectedOption.getAttribute('data-model');
-                document.getElementById('edit_year').value = selectedOption.getAttribute('data-year');
-                document.getElementById('edit_registration').value = selectedOption.getAttribute('data-registration');
-                document.getElementById('edit_mileage').value = selectedOption.getAttribute('data-mileage');
-                document.getElementById('edit_fuel').value = selectedOption.getAttribute('data-fuel');
-                document.getElementById('edit_transmission').value = selectedOption.getAttribute('data-transmission');
-                document.getElementById('edit_condition').value = selectedOption.getAttribute('data-condition');
-                document.getElementById('edit_colour').value = selectedOption.getAttribute('data-colour');
-                document.getElementById('edit_doors').value = selectedOption.getAttribute('data-doors');
-                document.getElementById('edit_description').value = selectedOption.getAttribute('data-description');
-                document.getElementById('edit_start_price').value = selectedOption.getAttribute('data-start_price');
-                document.getElementById('edit_end_date').value = selectedOption.getAttribute('data-end-date');
-                document.getElementById('edit_end_time').value = selectedOption.getAttribute('data-end-time');
-
-                for (let i = 1; i <= 4; i++) {
-                    const imgUrl = selectedOption.getAttribute(`data-image${i}`);
-                    const previewElement = document.getElementById(`preview_image${i}`);
-                    const noPreviewElement = document.getElementById(`no_preview_image${i}`);
-                    
-                    if (imgUrl) {
-                        // if there is an image show the image and hide the no image tag
-                        previewElement.src = imgUrl;
-                        previewElement.style.display = 'block'; 
-                        noPreviewElement.style.display = 'none';
-                    } else {
-                        previewElement.src = "";
-                        previewElement.style.display = 'none';
-                        noPreviewElement.style.display = 'block';
-                    }
-                }
-                
-            }
-        });
-
-
-    </script>
-
-
-    
-
-    
 
     </main>
 

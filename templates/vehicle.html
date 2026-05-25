@@ -99,6 +99,30 @@
                         <div class="col-12">
                             <h3 id="countdown" data-deadline="{{ listing.ends_at|date:'c' }}" class="text-danger">Calculating...</h3
                         </div>
+                        <div class="col-12">
+                            <!-- bid form -->
+                            {% if is_expired %}
+                                <div class="alert alert-danger fw-bold text-center">
+                                    This auction has ended.
+                                </div>
+                            {% else %}
+                                <form action="{% url 'place_bid' listing.id %}" method="POST">
+                                    {% csrf_token %}
+                                    <div class="input-group">
+                                        <span class="input-group-text">£</span>
+                                        <input type="number" name="bid_amount" class="form-control" placeholder="Enter your bid">
+                                        <button type="submit" class="btn btn-success">Place Bid</button>
+                                    </div>
+                                </form>
+                            {% endif %}
+
+
+                            <!-- <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
+                            <div id="demo" class="collapse">
+                            Lorem ipsum dolor text....
+                            </div> -->
+                        </div>
+
                     </div>
                 </div>
 
