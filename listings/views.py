@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from datetime import datetime
 from django.utils import timezone
-from .models import Listing
+from .models import Listing, Bid, Notification
 
 
 @login_required
@@ -153,55 +154,63 @@ def delete_listing(request, listing_id):
 
 
 # checks if new bid is higher, notify the out-bidden user
-# @login_required
-# def place_bid(request, listing_id):
-#     if request.method == "POST":
-#         listing = get_object_or_404(Listing, id=listing_id)
-        
-#         # check item not expired before bid submitted
-#         if listing.is_expired:
-#             if listing.status == "active":
-#                 listing.status = "ended"
-#                 listing.save(update_fields=['status'])
-                
-#             # stop the user from bidding
-#             messages.error(request, "This auction has already ended!")
-#             return redirect('vehicle_detail', listing_id=listing.id)
-            
-#         bid_amount = float(request.POST.get("bid_amount", 0))
-        
-#         return redirect('vehicle', listing_id=listing.id)
-
-
-
+@login_required
 def place_bid(request, listing_id):
-    print("--- 🚀 PLACE BID VIEW TRIGGERED ---") # Track 1
-    
     if request.method == "POST":
         bid_amount_raw = request.POST.get('bid_amount')
-        print(f"📥 Raw input received from HTML form: {bid_amount_raw}") # Track 2
-        
+
+        # stop empty values
+        if not bid_amount_raw or bid_amount_raw.strip() == "":
+            messages.error(request, "Invalid bid amount.")
+            return redirect('vehicle', listing_id=listing_id)
+            
+        # stop invalid / bad formatting/characters
         try:
-            # Check if converting to a float or decimal works
             bid_amount = float(bid_amount_raw)
-            print(f"🔢 Converted bid amount to number: {bid_amount}") # Track 3
         except (TypeError, ValueError):
-            print("❌ CRITICAL: Failed to convert bid_amount to a valid number!")
-            # If this prints, your HTML form is sending empty or broken data
+            messages.error(request, "Invalid bid amount format entered.")
+            return redirect('vehicle', listing_id=listing_id)
 
         listing = get_object_or_404(Listing, id=listing_id)
-        print(f"🚘 Current Listing Price in DB: {listing.current_price}") # Track 4
+        
+        # block bids on expired items
+        if listing.is_expired:
+            if listing.status == "active":
+                listing.status = "ended"
+                listing.save(update_fields=['status'])
+                
+            messages.error(request, "This auction has already ended!")
+            return redirect('vehicle', listing_id=listing.id)
 
-        # Check the logic gate
+        # save bid if it's higher than current price
         if bid_amount > float(listing.current_price):
-            print("✅ SUCCESS: New bid is higher than current price. Saving...") # Track 5
             
-            # ... your code that saves the bid and updates listing.current_price ...
+            # find previous highest bidder, before updating the price
+            previous_highest_bid = Bid.objects.filter(listing=listing).order_by('-bid').first()
             
-            print(f"💾 DB Updated! New current price is: {listing.current_price}")
+            # Create the new Bid record
+            Bid.objects.create(
+                user=request.user,
+                listing=listing,
+                bid=bid_amount
+            )
+            
+            # update the listing to show the new highest price
+            listing.current_price = bid_amount
+            listing.save()
+
+            # notify previous bidder if someone outbids them
+            if previous_highest_bid and previous_highest_bid.user != request.user:
+                Notification.objects.create(
+                    user=previous_highest_bid.user,
+                    listing=listing,
+                    message=f"You have been outbid on the {listing.title}! The new highest bid is £{bid_amount:.2f}."
+                )
+            
+            messages.success(request, f"Success! Your bid of £{bid_amount:.2f} has been placed.")
         else:
-            print("❌ FAILURE: Bid was NOT higher than current price. Skipping save!") # Track 6
+            messages.error(request, "Your bid must be higher than the current price.")
+            
+        return redirect('vehicle', listing_id=listing.id)
 
-    print("↩️ Redirecting back to vehicle page...") # Track 7
     return redirect('vehicle', listing_id=listing_id)
-
