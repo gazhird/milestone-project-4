@@ -3,6 +3,7 @@ from django.conf import settings
 from django.utils import timezone
 from cloudinary.models import CloudinaryField
 
+# Database models / listings
 
 class Listing(models.Model):
     make = models.CharField(max_length=50)
@@ -49,14 +50,11 @@ class Listing(models.Model):
 
 
     seller = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="listings"
-    )
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="listings")
     highest_bidder = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, related_name="highest_bids"
-    )
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, related_name="highest_bids")
     winner = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, related_name="won_listings"
-    )
+        settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, blank=True, null=True, related_name="won_listings")
     final_price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:
@@ -69,3 +67,31 @@ class Listing(models.Model):
 
     def __str__(self):
         return f"{self.make or 'No Make'} {self.model or 'No Model'}"
+    
+
+class Bid(models.Model):
+    # Connects a foreign key to the listing class above
+    listing = models.ForeignKey(Listing, on_delete=models.CASCADE, related_name='bids')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='placed_bids')
+    bid = models.DecimalField(max_digits=10, decimal_places=2)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-bid']
+
+    def __str__(self):
+        return f"£{self.bid} on {self.listing.make} by {self.user.username if self.user else 'Unknown'}"
+
+
+class Notification(models.Model):
+    
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
+    message = models.CharField(max_length=255)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"Alert for {self.user.username if self.user else 'Unknown'}: {self.message[:30]}"

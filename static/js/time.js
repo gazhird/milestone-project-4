@@ -40,12 +40,6 @@ function liveClock() {
 
 
 
-
-
-
-
-
-
 // Auction multiple countdown for index.html 
 
 function indexCountdowns() {
@@ -62,6 +56,7 @@ function indexCountdowns() {
             if (gap <= 0) {
                 clearInterval(interval);
                 timer.innerHTML = "Ended";
+                timer.classList.remove('text-danger');
                 return;
             }
 
@@ -69,16 +64,25 @@ function indexCountdowns() {
             const hours = Math.floor((gap % 86400000) / 3600000);
             const minutes = Math.floor((gap % 3600000) / 60000);
             const seconds = Math.floor((gap % 60000) / 1000);
+            
+            let displayTime = "";
 
-
-            // hide seconds if over 1 hour
-            if (gap > 3600000) {
-                timer.innerHTML = days + "d " + hours + "h " + minutes + "m";
-            } else {
-            // show seconds under 1 hour
-                timer.innerHTML = minutes + "m " + seconds + "s";
+            
+            if (days >=1) {
+                // more than 1 day 
+                displayText = days + "d " + hours + "h " + minutes + "m";
+            } 
+            else if (hours >= 1) {
+                // less than 1 day but more than 1 hour 
+                displayText = hours + "h " + minutes + "m"
+            }
+            else {
+                // less than 1 day, less than 1 hour
+                displayText = minutes + "m " + seconds + "s";
                 timer.classList.add('text-danger');
             }
+
+            timer.innerHTML = displayText;
 
         }, 1000);
     });

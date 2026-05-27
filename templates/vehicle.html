@@ -106,21 +106,16 @@
                                     This auction has ended.
                                 </div>
                             {% else %}
-                                <form action="{% url 'place_bid' listing.id %}" method="POST">
+                                <form  id="bidding-form" action="{% url 'place_bid' listing.id %}" method="POST">
                                     {% csrf_token %}
                                     <div class="input-group">
                                         <span class="input-group-text">£</span>
-                                        <input type="number" name="bid_amount" class="form-control" placeholder="Enter your bid">
-                                        <button type="submit" class="btn btn-success">Place Bid</button>
+                                        <input type="number" name="bid_amount" class="form-control" placeholder="Enter Bid">
+                                        <button type="submit" class="btn btn-success"></button>
                                     </div>
                                 </form>
                             {% endif %}
 
-
-                            <!-- <button data-bs-toggle="collapse" data-bs-target="#demo">Collapsible</button>
-                            <div id="demo" class="collapse">
-                            Lorem ipsum dolor text....
-                            </div> -->
                         </div>
 
                     </div>

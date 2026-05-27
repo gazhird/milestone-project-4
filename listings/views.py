@@ -7,6 +7,9 @@ from .models import Listing
 
 @login_required
 def upload(request):
+
+    # handles the upload form my_listings.html 
+
     if request.method == "POST":
     
         make = request.POST.get("make")
@@ -65,17 +68,19 @@ def upload(request):
     user_listings = Listing.objects.filter(seller=request.user)
     return render(request, "my_listings.html", {"listings": user_listings})
 
+
+# fetches vehicle data and shows as basic list on index.html 
 def list_view(request):
     listings = Listing.objects.all()
     return render(request, "listings/index.html", {"listings": listings})
 
 
-# show on home page
+# show tailored listings on index.html (add extra later)
 def home(request):
     listings = Listing.objects.all()
     return render(request, "index.html", {"listings": listings})
 
-# vehicle detail page request
+# shows a single selected vehicles details, checks if expired. vehicle.html
 def vehicle_detail(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id)
 
@@ -92,7 +97,7 @@ def vehicle_detail(request, listing_id):
     return render(request, 'vehicle.html', {'listing': listing})
 
 
-# from my listing edit modal
+# Handles the edit form my_listings.html
 @login_required
 def edit_listing(request):
     
@@ -136,7 +141,7 @@ def edit_listing(request):
         listing.save()
         return redirect('my_listings')
 
-
+# delete listing if seller. my_listings.html
 @login_required
 def delete_listing(request, listing_id):
     listing = get_object_or_404(Listing, id=listing_id)
@@ -147,7 +152,7 @@ def delete_listing(request, listing_id):
     return redirect('my_listings')
 
 
-
+# checks if new bid is higher, notify the out-bidden user
 @login_required
 def place_bid(request, listing_id):
     if request.method == "POST":

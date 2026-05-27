@@ -39,6 +39,18 @@ i will design the upload form first before building the backend end, as the form
 
 i have decided to keep this an Auctions site for vehicles only, i was considering other categories for example 'Household', 'Electrical' and 'Garden' but after considering the table design and all additional category specific data columns,  i will just keep it as one single category and add this 'Multiple category' idea to the applications future development section.
 
+### Bids
+
+Despite planning without this table i have decided to include a database which handles the bids
+with a foreign keys to link to listing, the buyer and seller.
+
+## Notifications
+
+The 4th tyable design to update users with information such as:
+- "You the top bidder"
+- "Sorry, you was outbid"
+- "Your listing sold"
+- "Your listing did not sell"
 
 
 

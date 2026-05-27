@@ -181,9 +181,13 @@ padding-right: 3px;
 /* notifications */
 .notifications-section {
   background-color: red;
+  height: 30px;
 }
 
-
+ul {
+  list-style-type: none;
+  padding: 4px 0px 0px 0px;
+}
 
 /* clock */
 .clock-section {
@@ -203,9 +207,11 @@ padding-right: 3px;
   font-weight: 700;
 }
 
+/* add min height for sample img on media querys  */
 #home-listings img {
   padding: 4px 0px 0px 4px;
-}
+  min-height: 90px
+} 
 
  #home-listings .details-box {
   align-self: stretch;
