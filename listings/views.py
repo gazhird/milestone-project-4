@@ -153,21 +153,55 @@ def delete_listing(request, listing_id):
 
 
 # checks if new bid is higher, notify the out-bidden user
-@login_required
-def place_bid(request, listing_id):
-    if request.method == "POST":
-        listing = get_object_or_404(Listing, id=listing_id)
+# @login_required
+# def place_bid(request, listing_id):
+#     if request.method == "POST":
+#         listing = get_object_or_404(Listing, id=listing_id)
         
-        # check item not expired before bid submitted
-        if listing.is_expired:
-            if listing.status == "active":
-                listing.status = "ended"
-                listing.save(update_fields=['status'])
+#         # check item not expired before bid submitted
+#         if listing.is_expired:
+#             if listing.status == "active":
+#                 listing.status = "ended"
+#                 listing.save(update_fields=['status'])
                 
-            # stop the user from bidding
-            messages.error(request, "This auction has already ended!")
-            return redirect('vehicle_detail', listing_id=listing.id)
+#             # stop the user from bidding
+#             messages.error(request, "This auction has already ended!")
+#             return redirect('vehicle_detail', listing_id=listing.id)
             
-        bid_amount = float(request.POST.get("bid_amount", 0))
+#         bid_amount = float(request.POST.get("bid_amount", 0))
         
-        return redirect('vehicle_detail', listing_id=listing.id)
+#         return redirect('vehicle', listing_id=listing.id)
+
+
+
+def place_bid(request, listing_id):
+    print("--- 🚀 PLACE BID VIEW TRIGGERED ---") # Track 1
+    
+    if request.method == "POST":
+        bid_amount_raw = request.POST.get('bid_amount')
+        print(f"📥 Raw input received from HTML form: {bid_amount_raw}") # Track 2
+        
+        try:
+            # Check if converting to a float or decimal works
+            bid_amount = float(bid_amount_raw)
+            print(f"🔢 Converted bid amount to number: {bid_amount}") # Track 3
+        except (TypeError, ValueError):
+            print("❌ CRITICAL: Failed to convert bid_amount to a valid number!")
+            # If this prints, your HTML form is sending empty or broken data
+
+        listing = get_object_or_404(Listing, id=listing_id)
+        print(f"🚘 Current Listing Price in DB: {listing.current_price}") # Track 4
+
+        # Check the logic gate
+        if bid_amount > float(listing.current_price):
+            print("✅ SUCCESS: New bid is higher than current price. Saving...") # Track 5
+            
+            # ... your code that saves the bid and updates listing.current_price ...
+            
+            print(f"💾 DB Updated! New current price is: {listing.current_price}")
+        else:
+            print("❌ FAILURE: Bid was NOT higher than current price. Skipping save!") # Track 6
+
+    print("↩️ Redirecting back to vehicle page...") # Track 7
+    return redirect('vehicle', listing_id=listing_id)
+

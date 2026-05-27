@@ -97,7 +97,7 @@
                         <div class="col-12 text-grey"><h3>Bidding Ends:</h3></div>
                         <div class="col-12 fw-bold text-md-start pt-2 pb-2"><h3>{{ listing.ends_at|date:"D d M Y, H:i"}}</h3></div>
                         <div class="col-12">
-                            <h3 id="countdown" data-deadline="{{ listing.ends_at|date:'c' }}" class="text-danger">Calculating...</h3
+                            <h3 id="countdown" data-deadline="{{ listing.ends_at|date:'c' }}" class="text-danger">Calculating...</h3>
                         </div>
                         <div class="col-12">
                             <!-- bid form -->
@@ -110,8 +110,8 @@
                                     {% csrf_token %}
                                     <div class="input-group">
                                         <span class="input-group-text">£</span>
-                                        <input type="number" name="bid_amount" class="form-control" placeholder="Enter Bid">
-                                        <button type="submit" class="btn btn-success"></button>
+                                        <input type="number" step="0.01" name="bid_amount" class="form-control" placeholder="Enter Bid">
+                                        <button type="submit" class="btn btn-success">Place Bid</button>
                                     </div>
                                 </form>
                             {% endif %}
