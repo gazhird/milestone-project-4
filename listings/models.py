@@ -84,9 +84,10 @@ class Bid(models.Model):
 
 
 class Notification(models.Model):
-    
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
-    message = models.CharField(max_length=255)
+    listing = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+    message = models.TextField(blank=True, null=True) 
+    status = models.CharField(max_length=50, default="unread") # 'outbid', 'won', 'sold'
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -94,4 +95,4 @@ class Notification(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return f"Alert for {self.user.username if self.user else 'Unknown'}: {self.message[:30]}"
+        return f"Notification for {self.user.username} - {self.status}"

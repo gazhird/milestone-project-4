@@ -18,10 +18,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="link" href="#notifications">
+                    <a class="link" href="{% url 'notifications' %}">
                         <i class="fa-solid fa-envelope mr-1"></i>Notifications 
+                        
                         {% if request.user.notifications.all %}
-                            ({{ request.user.notifications.all|length }})
+                            <span class="badge bg-danger text-white rounded-pill ms-1">New</span>
                         {% endif %}
                     </a>
                 </li>
@@ -122,17 +123,22 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-md-6 notifications-section">
-            <div id="notifications" class="notifications jcc">
-                <ul>
-                    {% for notification in request.user.notifications.all %}
-                        <li>
-                            <p>{{ notification.message }}</p>
-                            <small>{{ notification.created_at|date:"d M, H:i" }}</small>
-                        </li>
-                    {% empty %}
-                        <li>www.topbidder.com</li>
-                    {% endfor %}
-                </ul>
+            <div class="col-12 col-md-6 notifications-section">
+                <div id="notifications" class="notifications jcc">
+                    {% if user.is_authenticated %}
+                        {% if request.user.notifications.all %}
+                            <p class="black mb-0 pt-1 pb-1">
+                                <i class="fa-solid fa-circle-exclamation"></i> You Have A Notification 
+                            </p>
+                        {% else %}
+                            <p class="black mb-0 pt-1 pb-1">
+                                <i class="fa-solid fa-user "></i> Welcome {{ user.username }}
+                            </p>
+                        {% endif %}
+                    {% else %}
+                        <p class="black mb-0 pt-1 pb-1">WWW.TOPBIDDER.COM</p>
+                    {% endif %}
+                </div>
             </div>
         </div>
         <div class="col-12 col-md-6 clock-section jcc">

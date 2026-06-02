@@ -4,6 +4,7 @@ from django.contrib import messages
 from datetime import datetime
 from django.utils import timezone
 from .models import Listing, Bid, Notification
+from .utils import check_and_close_auctions
 
 
 @login_required
@@ -73,7 +74,7 @@ def upload(request):
 # fetches vehicle data and shows as basic list on index.html 
 def list_view(request):
     listings = Listing.objects.all()
-    return render(request, "listings/index.html", {"listings": listings})
+    return render(request, "index.html", {"listings": listings})
 
 
 # show tailored listings on index.html (add extra later)
@@ -204,7 +205,15 @@ def place_bid(request, listing_id):
                 Notification.objects.create(
                     user=previous_highest_bid.user,
                     listing=listing,
-                    message=f"You have been outbid on the {listing.title}! The new highest bid is £{bid_amount:.2f}."
+                    message=f"You have been outbid on the {listing.make} {listing.model}! The new highest bid is £{bid_amount:.2f}."
+                )
+            
+            # notify seller when a new bid is placed
+            if listing.seller != request.user: 
+                Notification.objects.create(
+                    user=listing.seller,
+                    listing=listing,
+                    message=f"New bid placed! Someone offered £{bid_amount:.2f} on your listing: {listing.make} {listing.model}."
                 )
             
             messages.success(request, f"Success! Your bid of £{bid_amount:.2f} has been placed.")
@@ -214,3 +223,16 @@ def place_bid(request, listing_id):
         return redirect('vehicle', listing_id=listing.id)
 
     return redirect('vehicle', listing_id=listing_id)
+
+
+@login_required
+def notifications_view(request):
+    check_and_close_auctions()
+    
+    # Get notifications for the current user
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
+    notifications_list = list(notifications)
+    notifications.filter(is_read=False).update(is_read=True)
+    return render(request, 'notifications.html', {
+        'notifications': notifications_list
+    })

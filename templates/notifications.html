@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top Bidder - Notifications</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="blk-background">
+
+{% include 'includes/navbar.html' %}
+
+<section id="notifications-page" class="blk-background">
+<main class="jcc">
+    <div class="hub-box">
+        <h2 class="hub-title"><i class="fa-solid fa-envelope"></i> NOTIFICATIONS</h2>
+            {% if notifications %}
+                <div class="alert-list">
+                    {% for notification in notifications %}
+    
+                    <div class="alert-card status-{{ notification.status|lower }}">
+                        <div class="card-header-row">
+                            <h3 class="status-title">
+                                {% if notification.notification_type == 'WON' or notification.status == 'won' %}AUCTION WON!
+                                {% elif notification.notification_type == 'OUTBID' or notification.status == 'outbid' %}OUTBID!
+                                {% elif notification.notification_type == 'SOLD' or notification.status == 'sold' %}VEHICLE SOLD!
+                                {% elif notification.notification_type == 'ENDED_NO_BIDS' or notification.status == 'ended_no_bids' %}AUCTION ENDED
+                                {% else %}ALERT{% endif %}
+                            </h3>
+                            <span class="time-stamp">{{ notification.created_at|timesince }} AGO</span>
+                        </div>
+                        
+                        <p class="card-text">
+                            {% if notification.message %}
+                                {{ notification.message }}
+                            {% else %}
+                                Update for <a href="{% url 'vehicle' notification.listing.id %}" class="notification-link"><strong>{{ notification.listing.make }} {{ notification.listing.model }}</strong></a>
+                            {% endif %}
+                        </p>
+                        
+                        </div>
+
+                {% endfor %}
+                </div>
+            {% else %}
+                <div class="empty-hub">
+                    <p>YOU HAVE NO NOTIFICATIONS AT THIS TIME.</p>
+                </div>
+            {% endif %}
+            </div>
+    </main>
+</section>
+    </body>
+</html>

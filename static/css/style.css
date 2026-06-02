@@ -344,11 +344,98 @@ ul {
   min-height: 100px;
 }
 
+/* notifications page  */
+
+#notifications-page .hub-box {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+    background-color: black;
+}
+
+#notifications-page .hub-title {
+    color: red;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-bottom: 3px solid red;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+#notifications-page .alert-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Base Alert Cards */
+#notifications-page .alert-card {
+    background-color: #111111; 
+    border-left: 6px solid lightgray;
+    padding: 20px;
+    text-transform: uppercase;
+}
+
+
+
+#notifications-page .alert-card.status-won {
+    border-color: green;
+}
+
+#notifications-page .alert-card.status-outbid {
+    border-color: red;
+}
+
+#notifications-page .alert-card.status-sold {
+    border-color: blue;
+}
+
+
+#notifications-page .card-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#notifications-page .status-title {
+    margin: 0;
+    font-weight: bold;
+}
+
+#notifications-page .time-stamp {
+    color: gray;
+    font-size: 14px;
+}
+
+#notifications-page .card-text {
+    margin-bottom: 15px;
+    color: white;
+}
+
+#notifications-page .custom-hub-btn {
+    display: inline-block;
+    font-size: 14px !important;
+    padding: 8px 16px !important;
+    text-decoration: none;
+    text-align: center;
+}
+
+/* Empty notifications */
+#notifications-page .empty-hub {
+    text-align: center;
+    padding: 60px 20px;
+    border: 2px dashed #333333;
+}
+
+#notifications-page .empty-hub h3 {
+    color: gray;
+}
 
 
 
 
-/* vehicle details */
+/* vehicle details page */
 
 #vehicle-details {
 background-color: black;

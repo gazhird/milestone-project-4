@@ -46,7 +46,7 @@ with a foreign keys to link to listing, the buyer and seller.
 
 ## Notifications
 
-The 4th tyable design to update users with information such as:
+The 4th table design to update users with information such as:
 - "You the top bidder"
 - "Sorry, you was outbid"
 - "Your listing sold"
