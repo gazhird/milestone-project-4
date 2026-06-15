@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     {% load static %}
+    {% load humanize %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body class="blk-background">
@@ -16,21 +17,24 @@
 <section id="notifications-page" class="blk-background">
 <main class="jcc">
     <div class="hub-box">
-        <h2 class="hub-title"><i class="fa-solid fa-envelope"></i> NOTIFICATIONS</h2>
+        <h2 class="red-title"><i class="fa-solid fa-envelope"></i> NOTIFICATIONS</h2>
             {% if notifications %}
                 <div class="alert-list">
                     {% for notification in notifications %}
     
                     <div class="alert-card status-{{ notification.status|lower }}">
-                        <div class="card-header-row">
-                            <h3 class="status-title">
+                        <div class="card-header-row" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                            <h3 class="status-title" style="margin: 0; font-size: 1.1rem;">
                                 {% if notification.notification_type == 'WON' or notification.status == 'won' %}AUCTION WON!
                                 {% elif notification.notification_type == 'OUTBID' or notification.status == 'outbid' %}OUTBID!
-                                {% elif notification.notification_type == 'SOLD' or notification.status == 'sold' %}VEHICLE SOLD!
-                                {% elif notification.notification_type == 'ENDED_NO_BIDS' or notification.status == 'ended_no_bids' %}AUCTION ENDED
-                                {% else %}ALERT{% endif %}
+                                {% elif notification.notification_type == 'SOLD' or notification.status == 'sold' or 'SOLD' in notification.message %}VEHICLE SOLD!
+                                {% elif notification.notification_type == 'ENDED_NO_BIDS' or notification.status == 'ended_no_bids' or 'NO BIDS' in notification.message %}AUCTION ENDED
+                                {% else %}<span style="color: #ff4d4d; font-weight: bold;">ALERT</span>{% endif %}
                             </h3>
-                            <span class="time-stamp">{{ notification.created_at|timesince }} AGO</span>
+                            
+                            <span class="time-stamp">
+                                {{ notification.created_at|naturaltime|upper }}
+                            </span>
                         </div>
                         
                         <p class="card-text">
@@ -53,5 +57,10 @@
             </div>
     </main>
 </section>
-    </body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'js/time.js' %}" ></script>
+    <script src="{% static 'js/myListings.js' %}" ></script>
+</body>
+
+</body>
 </html>

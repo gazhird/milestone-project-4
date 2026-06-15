@@ -43,6 +43,19 @@ p  {color: white;}
     color: black;
 }
 
+.red-title {
+    color: red;
+    font-weight: 800;
+    text-transform: uppercase;
+    border-bottom: 3px solid red;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+.bg-red {
+  background-color: red;
+}
+
 /* Navbar Mobile first / base */
 
 
@@ -200,7 +213,6 @@ ul {
 /* Index / home page */
 
  #home-listings {
-  margin-top: 20px;
   background-color: black;
   min-height: 1000px;
   color: white;
@@ -220,6 +232,9 @@ ul {
   text-transform: uppercase;
  }
 
+ #home-listings h1 {
+  padding-left: 4px
+ }
 
 #home-listings h3 {
   color: white;
@@ -262,24 +277,19 @@ ul {
 
 /* my listings page */
 
-#myListings {
- margin-top: 40px;
- background-color: black;
- color: white;
- font-weight: 700;
- padding: 10px;
-}
 
 
 /* Upload form section my listings page */
 
 #myListings {
-  margin-top: 40px;
+  padding-top: 1px;
   background-color: black;
   color: white;
   font-weight: 700;
 
 }
+
+
 
 #myListings h5 {
  text-transform: capitalize; 
@@ -304,6 +314,8 @@ ul {
 }
 
 /*  */
+
+
 
 .section-display label {
   color: white;
@@ -344,6 +356,12 @@ ul {
   min-height: 100px;
 }
 
+/* edit  */
+
+#edit select {
+  width: 50%;
+}
+
 /* notifications page  */
 
 #notifications-page .hub-box {
@@ -353,14 +371,6 @@ ul {
     background-color: black;
 }
 
-#notifications-page .hub-title {
-    color: red;
-    font-weight: 800;
-    text-transform: uppercase;
-    border-bottom: 3px solid red;
-    padding-bottom: 10px;
-    margin-bottom: 30px;
-}
 
 #notifications-page .alert-list {
     display: flex;
@@ -405,7 +415,9 @@ ul {
 
 #notifications-page .time-stamp {
     color: gray;
-    font-size: 14px;
+    font-size: 1rpx;
+    white-space: nowrap; 
+    margin-left: 10px;
 }
 
 #notifications-page .card-text {

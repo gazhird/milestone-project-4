@@ -14,25 +14,27 @@
 
 </head>
 <body>
-    <main>
+    <main class="blk-background">
 
     <!-- Navbar -->
     {% include 'includes/navbar.html' %}
 
-    <section id="myListings">
-        <div class="container-fluid">
+    <section id="myListings" class="blk-background">
+        <div class="container-fluid pt-4">
                     
-                    
-                    <button data-bs-toggle="collapse" data-bs-target="#view">View</button>
-                    <button data-bs-toggle="collapse" data-bs-target="#upload">Upload</button>
-                    <button data-bs-toggle="collapse" data-bs-target="#edit">Edit</button>
+                <div class="jcc">
+                    <div>
+                        <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#view">View</button>
+                        <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#upload">Upload</button>
+                        <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#edit">Edit</button>
+                    </div>
+                </div>
 
-
-
+                <div id="accordion">
                     <!-- View listings -->
-                    <div id="view" class="collapse pt-3">
+                    <div id="view" class="collapse show pt-4"  data-bs-parent="#accordion">
                         <div class="row">
-                            <h1>My Listings</h1>
+                            <h1 class="red-title pb-4">My Listings</h1>
                             {% for listing in listings %}
                                 <div class="col-md-4 col-sm-6 mb-4">
                                     <div class="card">
@@ -64,8 +66,8 @@
                                     </div>
                                 </div>
 
-                                    <!-- delete confirm modal -->
-                                    <div class="modal fade" id="deleteModal{{ listing.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <!-- delete confirm modal -->
+                                <div class="modal fade" id="deleteModal{{ listing.id }}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -102,9 +104,9 @@
 
                     
                     <!-- upload  -->
-                    <div id="upload" class="collapse pt-3">
+                    <div id="upload" class="collapse pt-4"  data-bs-parent="#accordion">
                         <div class="row">
-                            <h1>Upload Listings</h1> 
+                            <h1 class="pb-2">Upload Listings</h1> 
                                 <form method="post" action="{% url 'my_listings' %}" enctype="multipart/form-data" class="upload-form">
                                     {% csrf_token %}
                                     
@@ -237,12 +239,13 @@
 
                     
                     <!-- edit -->
-                    <div id="edit" class="collapse pt-4">
+                    <div id="edit" class="collapse pt-4"  data-bs-parent="#accordion">
                     <div class="row">
-                            <h1>Edit Listings</h1> 
+                            <h1 class="pb-4">Edit Listings</h1> 
                                 
                                 <!------ select for vehicle to edit -->
-                                    <select id="vehicleEditSelector" class="form-select bg-black text-white border-secondary">
+                                <div class="jcc">
+                                    <select id="vehicleEditSelector" class="form-select bg-black text-white border-secondary pb-2">
                                         <option value="" selected disabled>Select Vehicle</option>
                                         {% for listing in listings %}
                                             <option value="{{ listing.id }}" 
@@ -263,9 +266,10 @@
                                             <option value="">No Vehicles</option>
                                         {% endfor %}
                                     </select>
+                                </div>
 
                                 <!-- edit form -->
-                                <div id="editForm">
+                                <div id="editForm" class="pt-4">
                                     <form action="{% url 'edit_listing' %}" method="POST" enctype="multipart/form-data">
                                     {% csrf_token %}
                                     <div class="form-row">
@@ -409,7 +413,7 @@
                         </div> 
                     </div>
                     </div>
-              
+              </div>
             </div>
     </section>
 
