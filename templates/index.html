@@ -13,109 +13,100 @@
     
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
   </head>
-  <body>
+  <body class="blk-background">
     <main>
 
 
-        <!-- Navbar -->
-
-        {% include 'includes/navbar.html' %}
+      <!-- Navbar -->
+      {% include 'includes/navbar.html' %}
 
 
 
 <section id="home-listings" >
-  
-  <div class="container-fluid pt-3">
-    <h1 class="red-title pb-4 pl-4">Auction </h1>
-    <!-- Auction vehicles -->
-      {% if listings %}
-        {% for listing in listings %}
-          <div class="row mb-3 pt-2 border-bottom">
-
-            <div class="col-4 p-0">
-                {% if listing.image1 %}
-                    <img src="{{ listing.image1.url }}" class="img-fluid rounded pb-2" 
-                    alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
-                    data-bs-toggle="modal"  data-bs-target="#imageModal{{ listing.id }}">
-                {% else %}
-                    <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
-                {% endif %}
-            </div>
-
-
-            <div class="col-8 details-box d-flex flex-column justify-content-between">
-              <a href="{% url 'vehicle' listing.id %}" class="text-decoration-none text-dark">
-                  <h4 class="pt-1">{{ listing.make }} {{ listing.model }} {{listing.year}}</h4>
-              </a>
-                  <h3>£{{listing.starting_price}}</h3>
-                  
-                  <div class="auction-timer" data-deadline="{{ listing.ends_at|date:'c' }}">
-                    Calculating...
-                  </div>
-            </div>  
-          </div>
-
-          <!-- Image Modal -->
-          <div class="modal fade" id="imageModal{{ listing.id }}" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-              <div class="modal-content">
-
-            
-                <div class="modal-header jcc">
-                  <h4 class="modal-title">{{ listing.make }} {{ listing.model }}</h4>
-                </div>
-
-                <div class="modal-body">
+    <div class="container-fluid pt-3">
+      <h1 class="red-title pb-4 pl-4">Auction </h1>
+      <!-- Auction vehicles -->
+        {% if listings %}
+        <div class="row">
+          {% for listing in listings %}
+            <div class="col-12 col-lg-6 mb-3 pt-2 mb-3 pt-2 border-bottom">
+            <div class="row">
+              <div class="col-4 col-md-6 p-0">
                   {% if listing.image1 %}
-                    <img src="{{ listing.image1.url }}" class="img-fluid rounded" alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
-                    data-bs-toggle="modal"  data-bs-target="#imageModal{{ listing.id }}">
-                {% else %}
-                    <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
-                {% endif %}
-                </div>
+                      <img src="{{ listing.image1.url }}" class="img-fluid rounded pb-2" 
+                      alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
+                      data-bs-toggle="modal"  data-bs-target="#imageModal{{ listing.id }}">
+                  {% else %}
+                      <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
+                  {% endif %}
+              </div>
 
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                </div>
 
+              <div class="col-8 col-md-6 details-box d-flex flex-column justify-content-between">
+                <a href="{% url 'vehicle' listing.id %}" class="text-decoration-none text-dark">
+                    <h4 class="pt-1">{{ listing.make }} {{ listing.model }} {{listing.year}}</h4>
+                </a>
+                    <h3>£{{listing.starting_price}}</h3>
+                    <h3 class="d-none d-md-block">{{ listing.condition}}</h3>
+                    <h3 class="d-none d-md-block">{{ listing.mileage}} Miles</h3>
+                    <h3 class="d-none d-md-block">{{ listing.transmission}}</h3>
+                    
+                    <div class="auction-timer" data-deadline="{{ listing.ends_at|date:'c' }}">
+                      Calculating...
+                    </div>
               </div>
             </div>
-          </div> 
+            </div>
 
 
 
 
+            <!-- Image Modal -->
+            <div class="modal fade" id="imageModal{{ listing.id }}" tabindex="-1" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
 
+              
+                  <div class="modal-header jcc">
+                    <h4 class="modal-title">{{ listing.make }} {{ listing.model }}</h4>
+                  </div>
 
+                  <div class="modal-body">
+                    {% if listing.image1 %}
+                      <img src="{{ listing.image1.url }}" class="img-fluid rounded" alt="{{ listing.make }} {{ listing.model }} {{ listing.id }}"
+                      data-bs-toggle="modal"  data-bs-target="#imageModal{{ listing.id }}">
+                  {% else %}
+                      <img src="{% static 'images/sample_image.jpg' %}" class="img-fluid rounded" alt="Sample image">
+                  {% endif %}
+                  </div>
 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                  </div>
 
-        {% endfor %}
-      {% else %}
-        <div class="row">
-          <div class="col-12 text-center">
-            <h1>No vehicles..</h1>
+                </div>
+              </div>
+            </div> 
+
+          {% endfor %}
+        {% else %}
+          <div class="row">
+            <div class="col-12 text-center">
+              <h1>No vehicles..</h1>
+            </div>
           </div>
-        </div>
-      {% endif %}
-  </div>
+        {% endif %}
+    </div>
 </section>
-
-
-
-
-
 
 
     </main>
 
-    
-
+    {% include 'includes/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="{% static 'js/time.js' %}" ></script>
     <script src="{% static 'js/main.js' %}" ></script>
-
-
 
 
   </body>

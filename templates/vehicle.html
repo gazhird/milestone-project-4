@@ -23,49 +23,49 @@
     <div class="container-fluid">
         {% if listing %}
             <div class="row">
-                
-                <div class="col-12 col-md-6 img-box pt-3">
-                    
+                <div class="jcc">
+                    <div class="col-12 img-box pt-3 jcc">
+                        
 
-                            <div id="image1" onclick="nextImg(2)" class="">
-                            {% if listing.image1 %}
-                                <img src="{{ listing.image1.url }}" class="d-block w-100 rounded" alt="Front view">
-                            {% else %}
+                                <div id="image1" onclick="nextImg(2)" class="">
+                                {% if listing.image1 %}
+                                    <img src="{{ listing.image1.url }}" class="d-block w-100 rounded" alt="Front view">
+                                {% else %}
+                                    <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
+                                {% endif %}
+                                </div>
+                                
+                                <div id="image2" onclick="nextImg(3)" class="" style="display: none;">
+                                {% if listing.image2 %}
+                                <img src="{{ listing.image2.url }}" class="d-block w-100 rounded" alt="Side view">
+                                {% else %}
                                 <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
-                            {% endif %}
-                            </div>
+                                {% endif %}
+                                </div>
                             
-                            <div id="image2" onclick="nextImg(3)" class="" style="display: none;">
-                            {% if listing.image2 %}
-                            <img src="{{ listing.image2.url }}" class="d-block w-100 rounded" alt="Side view">
-                            {% else %}
-                            <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
-                            {% endif %}
-                            </div>
-                        
-                            <div id="image3" onclick="nextImg(4)" class="" style="display: none;">
-                            {% if listing.image3 %}
-                            <img src="{{ listing.image3.url }}" class="d-block w-100 rounded" alt="Interior">
-                            {% else %}
-                            <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
-                            {% endif %}
-                            </div>
-                        
-                            <div id="image4" onclick="nextImg(1)" class="" style="display: none;" >
-                            {% if listing.image4 %}
-                            <img src="{{ listing.image4.url }}" class="d-block w-100 rounded" alt="Rear view">
-                            {% else %}
-                            <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
-                            {% endif %}
-                            </div>
-                        
-                            <div id="imgNum" class="right"></div>
+                                <div id="image3" onclick="nextImg(4)" class="" style="display: none;">
+                                {% if listing.image3 %}
+                                <img src="{{ listing.image3.url }}" class="d-block w-100 rounded" alt="Interior">
+                                {% else %}
+                                <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
+                                {% endif %}
+                                </div>
+                            
+                                <div id="image4" onclick="nextImg(1)" class="" style="display: none;" >
+                                {% if listing.image4 %}
+                                <img src="{{ listing.image4.url }}" class="d-block w-100 rounded" alt="Rear view">
+                                {% else %}
+                                <img src="{% static 'images/sample_image.jpg' %}" class="d-block w-100 rounded" alt="Sample image">
+                                {% endif %}
+                                </div>
+                            
+                                <div id="imgNum" class="right"></div> 
                     </div>
+                </div>
 
-
-                    <div class="col-12 jcc pt-3">
-                        <h2>{{ listing.make }} {{ listing.model }}</h2> 
-                    </div>
+                <div class="col-12 jcc pt-3">
+                    <h2>{{ listing.make }} {{ listing.model }}</h2> 
+                </div>
             
             <!-- bidding section -->
 
@@ -212,6 +212,7 @@
   
 </section>
 
+{% include 'includes/footer.html' %}
 
 
 

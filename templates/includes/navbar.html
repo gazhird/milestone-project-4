@@ -1,8 +1,8 @@
 
-<nav class="navbar navbar-expand-sm">
+<nav class="navbar navbar-expand-md">
     <div class="container-fluid ">
             <h1 class="navbar-brand" >Top Bidder</h1>
-            <button class="nav-button navbar-toggler d-sm-none" type="button" data-bs-toggle="collapse" 
+            <button class="nav-button navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" 
             data-bs-target="#collapsibleNavbar" aria-label="Toggle navigation">
             <i class="fa-solid fa-bars"></i>
             </button>
@@ -127,8 +127,8 @@
                 <div id="notifications" class="notifications jcc">
                     {% if user.is_authenticated %}
                         {% if request.user.notifications.all %}
-                            <p class="black mb-0 pt-1 pb-1">
-                                <i class="fa-solid fa-circle-exclamation"></i> You Have A Notification 
+                            <p class="black mb-0 notification-bar">
+                                <i class="fa-solid fa-circle-exclamation"></i> New Notification 
                             </p>
                         {% else %}
                             <p class="black mb-0 pt-1 pb-1">

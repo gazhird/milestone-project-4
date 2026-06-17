@@ -23,7 +23,7 @@
         <div class="container-fluid pt-4">
                     
                 <div class="jcc">
-                    <div>
+                    <div class="pb-4">
                         <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#view">View</button>
                         <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#upload">Upload</button>
                         <button class="btn btn-danger" data-bs-toggle="collapse" data-bs-target="#edit">Edit</button>
@@ -57,7 +57,7 @@
                                         
                                         <div class="card-footer">
                                             <!-- edit button -->
-                                            <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editModal{{ listing.id }}">Edit</button>
+                                            <button class="btn btn-warning" data-bs-toggle="collapse" data-bs-target="#edit">Edit</button>
                                             <!-- delete button  -->
                                              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ listing.id }}">
                                                 Delete
@@ -417,6 +417,7 @@
             </div>
     </section>
 
+        {% include 'includes/footer.html' %}
 
     </main>
 

@@ -7,7 +7,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = os.getenv('SECRET_KEY', 'my_secret_key')
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Set as False for deployment on heroku
 # Collect static before commit / pushing
@@ -131,15 +131,16 @@ LOGGING = {
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': os.getenv('CLOUDINARY_CLOUD_NAME'),
-    'API_KEY': os.getenv('CLOUDINARY_API_KEY', '785883381875157'),
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),}
 
 
 import cloudinary
 
+
 cloudinary.config( 
-  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME', 'dmdojvspx'), 
-  api_key = os.getenv('CLOUDINARY_API_KEY', '785883381875157'), 
+  cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME'), 
+  api_key = os.getenv('CLOUDINARY_API_KEY'), 
   api_secret = os.getenv('CLOUDINARY_API_SECRET'),
   secure = True
 )
