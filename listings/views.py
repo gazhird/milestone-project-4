@@ -236,3 +236,67 @@ def notifications_view(request):
     return render(request, 'notifications.html', {
         'notifications': notifications_list
     })
+
+
+# stripe payments 
+
+import stripe
+from django.conf import settings
+
+stripe.api_key = settings.STRIPE_SECRET_KEY
+
+
+@login_required
+def delete_notification(request, notification_id):
+    notification = get_object_or_404(Notification, id=notification_id, user=request.user)
+    notification.delete()
+    return redirect('notifications')
+
+
+@login_required
+def create_checkout_session(request, listing_id):
+    listing = get_object_or_404(Listing, id=listing_id)
+    
+    if listing.winner != request.user:
+        messages.error(request, "You are not the winner of this auction.")
+        return redirect('notifications')
+    
+    if listing.status != "ended":
+        messages.error(request, "This auction has not ended yet.")
+        return redirect('notifications')
+    
+    if listing.paid:
+        messages.info(request, "You have already paid for this item.")
+        return redirect('notifications')
+    
+    try:
+        session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'gbp',
+                    'product_data': {
+                        'name': f"{listing.make} {listing.model}",
+                    },
+                    'unit_amount': int(listing.current_price * 100),
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            success_url=request.build_absolute_uri('/payment/success/'),
+            cancel_url=request.build_absolute_uri('/payment/cancel/'),
+        )
+        return redirect(session.url, code=303)
+        
+    except Exception as e:
+        messages.error(request, f"Payment failed: {str(e)}")
+        return redirect('notifications')
+
+
+def payment_success(request):
+    messages.success(request, "Payment successful! Thank you for your purchase.")
+    return redirect('notifications')
+
+def payment_cancel(request):
+    messages.error(request, "Payment was cancelled.")
+    return redirect('notifications')

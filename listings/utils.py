@@ -20,13 +20,18 @@ def check_and_close_auctions():
         winning_bid = Bid.objects.filter(listing=listing).order_by('-bid').first()
         
         if winning_bid:
+            # Set the winner and final price
+            listing.winner = winning_bid.user
+            listing.final_price = winning_bid.bid
+            listing.save()
+
             # alert the Winner
             Notification.objects.create(
                 user=winning_bid.user,
                 listing=listing,
                 message=f"Congratulations! You won the auction for the {listing.make} {listing.model} with a bid of £{winning_bid.bid:.2f}. Proceed to payment to secure it!"
             )
-            
+                    
             # alert the Seller
             Notification.objects.create(
                 user=listing.seller,

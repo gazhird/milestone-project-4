@@ -11,6 +11,7 @@ class Listing(models.Model):
     year = models.PositiveIntegerField()
     registration = models.CharField(max_length=20)
     mileage = models.PositiveIntegerField()
+    paid = models.BooleanField(default=False)
 
     # Select options
     FUEL_CHOICES = [
@@ -87,7 +88,7 @@ class Notification(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='notifications')
     listing = models.ForeignKey('Listing', on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
     message = models.TextField(blank=True, null=True) 
-    status = models.CharField(max_length=50, default="unread") # 'outbid', 'won', 'sold'
+    status = models.CharField(max_length=50, default="unread")
     is_read = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 

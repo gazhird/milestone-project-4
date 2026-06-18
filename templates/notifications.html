@@ -16,6 +16,7 @@
 
 <section id="notifications-page" class="blk-background">
 <main class="jcc">
+
     <div class="hub-box">
         <h2 class="red-title"><i class="fa-solid fa-envelope"></i> NOTIFICATIONS</h2>
             {% if notifications %}
@@ -29,7 +30,7 @@
                                 {% elif notification.notification_type == 'OUTBID' or notification.status == 'outbid' %}OUTBID!
                                 {% elif notification.notification_type == 'SOLD' or notification.status == 'sold' or 'SOLD' in notification.message %}VEHICLE SOLD!
                                 {% elif notification.notification_type == 'ENDED_NO_BIDS' or notification.status == 'ended_no_bids' or 'NO BIDS' in notification.message %}AUCTION ENDED
-                                {% else %}<span style="color: #ff4d4d; font-weight: bold;">ALERT</span>{% endif %}
+                                {% else %}<span style="color: red; font-weight: bold;">ALERT</span>{% endif %}
                             </h3>
                             
                             <span class="time-stamp">
@@ -45,7 +46,22 @@
                             {% endif %}
                         </p>
                         
-                        </div>
+                        <!-- stripe payments  -->
+                         {% if 'won' in notification.message|lower %}
+                            {% if not notification.listing.paid %}
+                                <a href="{% url 'pay' notification.listing.id %}">PAY NOW</a><br><br>
+                            {% else %}
+                                <span>PAID</span><br>
+                            {% endif %}
+                        {% endif %}
+
+                        <form action="{% url 'delete_notification' notification.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger" >DELETE</button>
+                        </form>
+
+
+                    </div>
 
                 {% endfor %}
                 </div>

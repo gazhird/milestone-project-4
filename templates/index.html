@@ -49,11 +49,10 @@
                     <h3>£{{listing.starting_price}}</h3>
                     <h3 class="d-none d-md-block">{{ listing.condition}}</h3>
                     <h3 class="d-none d-md-block">{{ listing.mileage}} Miles</h3>
-                    <h3 class="d-none d-md-block">{{ listing.transmission}}</h3>
                     
-                    <div class="auction-timer" data-deadline="{{ listing.ends_at|date:'c' }}">
+                    <h3 class="auction-timer" data-deadline="{{ listing.ends_at|date:'c' }}">
                       Calculating...
-                    </div>
+                    </h3>
               </div>
             </div>
             </div>
