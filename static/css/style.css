@@ -194,7 +194,6 @@ padding-right: 3px;
 /* notifications */
 .notifications-section {
   background-color: red;
-  height: 30px;
 }
 
 .notification-bar {
@@ -368,6 +367,31 @@ ul {
 }
 
 /* notifications page  */
+
+
+.updates-section {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 20px;
+}
+
+.updates-section .alert {
+    padding: 12px 20px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.updates-section .alert-success {
+    background-color: #28a745;
+}
+
+.updates-section .alert-error {
+    background-color: red;
+}
+
+
+
 
 #notifications-page .hub-box {
     width: 100%;

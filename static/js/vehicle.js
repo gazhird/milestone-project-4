@@ -12,13 +12,11 @@
 function auctionCountdown() {
 
 const countdownDiv = document.getElementById('countdown');
-const deadlineString = countdownDiv.getAttribute('data-deadline');
-
-const deadlineTime = new Date(deadlineString).getTime()
+const deadlineMs = parseInt(countdownDiv.getAttribute('data-deadline-ms'));
 
 const interval = setInterval(function() {
     const now = new Date().getTime();
-    const difference = deadlineTime - now;
+    const difference = deadlineMs - now;
 
     if (difference <= 0) {
             clearInterval(interval);

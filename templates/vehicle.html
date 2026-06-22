@@ -19,6 +19,23 @@
         <!-- Navbar -->
         {% include 'includes/navbar.html' %}
 
+<div class="container-fluid blk-background">
+    <div class="row pt-4">
+        <div class="col-12 pt-2 jcc">
+            {% if messages %}
+                <div class="updates-section">
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
 <section id="vehicle-details" >
     <div class="container-fluid">
         {% if listing %}
@@ -97,7 +114,7 @@
                         <div class="col-12 text-grey"><h3>Bidding Ends:</h3></div>
                         <div class="col-12 fw-bold text-md-start pt-2 pb-2"><h3>{{ listing.ends_at|date:"D d M Y, H:i"}}</h3></div>
                         <div class="col-12">
-                            <h3 id="countdown" data-deadline="{{ listing.ends_at|date:'c' }}" class="text-danger">Calculating...</h3>
+                            <h3 id="countdown" data-deadline-ms="{{ listing.ends_at|date:'U' }}000" class="text-danger">Calculating...</h3>
                         </div>
                         <div class="col-12">
                             <!-- bid form -->

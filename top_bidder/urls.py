@@ -8,8 +8,7 @@ from listings import views as listing_views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("accounts.urls")),
-    path("listings/", include("listings.urls")),
-    path("", listing_views.home, name="home"),
+    path("", include("listings.urls")),
 ]
 
 
