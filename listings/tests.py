@@ -1,3 +1,35 @@
 from django.test import TestCase
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+from datetime import timedelta
+from .models import Listing, Bid
 
-# Create your tests here.
+User = get_user_model()
+
+
+class ListingTest(TestCase):
+    def test_create_listing(self):
+        # test new listing
+        user = User.objects.create_user(username="test01", password="password")
+        listing = Listing.objects.create(
+            make="Ford",
+            model="Fiesta",
+            year=2026,
+            registration="TEST 001",
+            mileage=100000,
+            fuel="petrol",
+            transmission="manual",
+            condition="good",
+            colour="Red",
+            doors=5,
+            description="Test Description 001",
+            starting_price=1000,
+            current_price=1000,
+            ends_at=timezone.now() + timedelta(days=1),
+            seller=user,
+            status="active"
+        )
+        self.assertEqual(listing.make, "Ford")
+        self.assertEqual(listing.model, "Fiesta")
+
+
