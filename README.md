@@ -255,6 +255,14 @@ When a vehicle detail is requested. i have place a check 'is_expired' in vehicle
 
 Final if_expired check made as bids are submitted 
 
+### Issue 6: static files clash for Heroku
+
+I believe having a folder called Static and also Staticfiles caused a conflict with Django.
+This has been a small issue throughout the project and made it more challenging to compare Development and Deployment. 
+I solved this by adding / copying static files manually through my terminal. 
+xcopy static\* staticfiles\ /s /e /y
+
+
 ---------------------
 
 ## Version Control
