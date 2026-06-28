@@ -1,5 +1,6 @@
 from django.contrib.auth import login, logout
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from functools import wraps
 from .forms import RegisterForm, LoginForm
 
@@ -21,6 +22,10 @@ def register_view(request):
             user = form.save()
             login(request, user)
             return redirect("home")
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     return redirect("home")
 
 
@@ -32,6 +37,10 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             return redirect("home")
+        else:
+            for field, errors in form.errors.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
     return redirect("home")
 
 
