@@ -54,6 +54,8 @@ The 'Won' condition on the notification page presents the buy form which directs
 
 Mobile / Tablet / Desktop
 
+<img src="static/images/viewpoint-display-images.png" alt="Multiple viewpoint display" width="600">
+
 
 ## User Stories
 

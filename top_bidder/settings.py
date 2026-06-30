@@ -16,13 +16,13 @@ STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
 # manual copy the static files before commit / pushing
 # xcopy static\* staticfiles\ /s /e /y 
 
-DEBUG = True  # false for heroku commit!!!
+DEBUG = False  # false for heroku commit!!!
 
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.herokuapp.com']
 
 
-# Application definition
+# Applications
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -36,8 +36,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'accounts',
     'listings',
-    
-    
 ]
 
 MIDDLEWARE = [
